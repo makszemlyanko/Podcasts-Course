@@ -13,6 +13,9 @@
 		150DA23A2876C98500690800 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 150DA2382876C98500690800 /* Main.storyboard */; };
 		150DA23C2876C98800690800 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 150DA23B2876C98800690800 /* Assets.xcassets */; };
 		150DA23F2876C98800690800 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 150DA23D2876C98800690800 /* LaunchScreen.storyboard */; };
+		1536851228781FE90022C6F1 /* PodcastsSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1536851128781FE90022C6F1 /* PodcastsSearchController.swift */; };
+		15368516287820F50022C6F1 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15368515287820F50022C6F1 /* Podcast.swift */; };
+		15D03FBF2876CF3600558AA0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D03FBE2876CF3600558AA0 /* MainTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		150DA23B2876C98800690800 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		150DA23E2876C98800690800 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		150DA2402876C98800690800 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1536851128781FE90022C6F1 /* PodcastsSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsSearchController.swift; sourceTree = "<group>"; };
+		15368515287820F50022C6F1 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
+		15D03FBE2876CF3600558AA0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,50 @@
 		150DA2312876C98500690800 /* PodcastsCourse */ = {
 			isa = PBXGroup;
 			children = (
-				150DA2322876C98500690800 /* AppDelegate.swift */,
-				150DA2342876C98500690800 /* SceneDelegate.swift */,
-				150DA2362876C98500690800 /* ViewController.swift */,
-				150DA2382876C98500690800 /* Main.storyboard */,
+				15368514287820E20022C6F1 /* Models */,
+				150DA2502876CC9E00690800 /* Controllers */,
+				150DA24F2876CC8300690800 /* Views */,
+				150DA24D2876CC7700690800 /* Delegate */,
 				150DA23B2876C98800690800 /* Assets.xcassets */,
-				150DA23D2876C98800690800 /* LaunchScreen.storyboard */,
 				150DA2402876C98800690800 /* Info.plist */,
 			);
 			path = PodcastsCourse;
+			sourceTree = "<group>";
+		};
+		150DA24D2876CC7700690800 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				150DA2322876C98500690800 /* AppDelegate.swift */,
+				150DA2342876C98500690800 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		150DA24F2876CC8300690800 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				150DA2362876C98500690800 /* ViewController.swift */,
+				150DA2382876C98500690800 /* Main.storyboard */,
+				150DA23D2876C98800690800 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		150DA2502876CC9E00690800 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				15D03FBE2876CF3600558AA0 /* MainTabBarController.swift */,
+				1536851128781FE90022C6F1 /* PodcastsSearchController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		15368514287820E20022C6F1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				15368515287820F50022C6F1 /* Podcast.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +180,9 @@
 			files = (
 				150DA2372876C98500690800 /* ViewController.swift in Sources */,
 				150DA2332876C98500690800 /* AppDelegate.swift in Sources */,
+				15368516287820F50022C6F1 /* Podcast.swift in Sources */,
+				15D03FBF2876CF3600558AA0 /* MainTabBarController.swift in Sources */,
+				1536851228781FE90022C6F1 /* PodcastsSearchController.swift in Sources */,
 				150DA2352876C98500690800 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,7 +340,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.maksApp.PodcastsCourse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -315,7 +359,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.maksApp.PodcastsCourse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
