@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,7 +14,7 @@
 		150DA23C2876C98800690800 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 150DA23B2876C98800690800 /* Assets.xcassets */; };
 		150DA23F2876C98800690800 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 150DA23D2876C98800690800 /* LaunchScreen.storyboard */; };
 		1536851228781FE90022C6F1 /* PodcastsSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1536851128781FE90022C6F1 /* PodcastsSearchController.swift */; };
-		15368516287820F50022C6F1 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15368515287820F50022C6F1 /* Podcast.swift */; };
+		15A26583287B0FDC00E6F03C /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A26582287B0FDC00E6F03C /* SearchResult.swift */; };
 		15D03FBF2876CF3600558AA0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D03FBE2876CF3600558AA0 /* MainTabBarController.swift */; };
 		4313B16DA308D56253659A15 /* Pods_PodcastsCourse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 481E83371C1A3AEE98785C4F /* Pods_PodcastsCourse.framework */; };
 /* End PBXBuildFile section */
@@ -29,7 +29,7 @@
 		150DA23E2876C98800690800 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		150DA2402876C98800690800 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1536851128781FE90022C6F1 /* PodcastsSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsSearchController.swift; sourceTree = "<group>"; };
-		15368515287820F50022C6F1 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
+		15A26582287B0FDC00E6F03C /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		15D03FBE2876CF3600558AA0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		481E83371C1A3AEE98785C4F /* Pods_PodcastsCourse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodcastsCourse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		541CF5E3DBC50B65444A3361 /* Pods-PodcastsCourse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodcastsCourse.release.xcconfig"; path = "Target Support Files/Pods-PodcastsCourse/Pods-PodcastsCourse.release.xcconfig"; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 		15368514287820E20022C6F1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				15368515287820F50022C6F1 /* Podcast.swift */,
+				15A26582287B0FDC00E6F03C /* SearchResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -121,7 +121,6 @@
 				BD065CB50E29F0577A2EFFE3 /* Pods-PodcastsCourse.debug.xcconfig */,
 				541CF5E3DBC50B65444A3361 /* Pods-PodcastsCourse.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -248,8 +247,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				150DA2372876C98500690800 /* ViewController.swift in Sources */,
+				15A26583287B0FDC00E6F03C /* SearchResult.swift in Sources */,
 				150DA2332876C98500690800 /* AppDelegate.swift in Sources */,
-				15368516287820F50022C6F1 /* Podcast.swift in Sources */,
 				15D03FBF2876CF3600558AA0 /* MainTabBarController.swift in Sources */,
 				1536851228781FE90022C6F1 /* PodcastsSearchController.swift in Sources */,
 				150DA2352876C98500690800 /* SceneDelegate.swift in Sources */,
