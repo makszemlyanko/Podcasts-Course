@@ -42,7 +42,6 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     // MARK: - Table View
     
     fileprivate func setupTableView() {
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         let nib = UINib(nibName: "PodcastCell", bundle: nil)
         tableView.register(nib , forCellReuseIdentifier: cellId)
     }
@@ -55,10 +54,6 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PodcastCell
         let podcast = self.podcasts[indexPath.row]
         cell.podcast = podcast
-//        let podcast = self.podcasts[indexPath.row]
-//        cell.textLabel?.text = "\(podcast.trackName ?? "")\n\(podcast.artistName ?? "")"
-//        cell.textLabel?.numberOfLines = -1
-//        cell.imageView?.image = #imageLiteral(resourceName: "appicon")
         return cell
     }
     
