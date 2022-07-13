@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PodcastCell: UITableViewCell {
     
@@ -24,13 +25,13 @@ class PodcastCell: UITableViewCell {
             artistNameLabel.numberOfLines = 2
             episodeCountLabel.text = "\(podcast.trackCount ?? 0) Episodes"
             guard let url = URL(string: podcast.artworkUrl600 ?? "") else { return }
-            URLSession.shared.dataTask(with: url) { (data, _, _) in
-                print(data)
-                guard let data = data else { return }
-                DispatchQueue.main.async {
-                    self.podcastImageView.image = UIImage(data: data)
-                }
-            }.resume()
+//            URLSession.shared.dataTask(with: url) { (data, _, _) in
+//                guard let data = data else { return }
+//                DispatchQueue.main.async {
+//                    self.podcastImageView.image = UIImage(data: data)
+//                }
+//            }.resume() 
+            podcastImageView.sd_setImage(with: url, completed: nil)
         }
     }
      

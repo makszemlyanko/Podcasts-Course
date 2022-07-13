@@ -39,9 +39,23 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    // MARK: - Table View
+    // MARK: - UITableView
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Please enter a search term above"
+        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: 20)
+        label.textColor = .purple
+        return label
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 250
+    }
     
     fileprivate func setupTableView() {
+        tableView.tableFooterView = UIView() // remove horizontal lines (dividers)
         let nib = UINib(nibName: "PodcastCell", bundle: nil)
         tableView.register(nib , forCellReuseIdentifier: cellId)
     }
