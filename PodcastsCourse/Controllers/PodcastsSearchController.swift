@@ -47,11 +47,16 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 20)
         label.textColor = .purple
+        label.isHidden = podcasts.count != 0
         return label
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 250
+        if podcasts.count == 0 {
+            return 350
+        } else {
+            return 0
+        }
     }
     
     fileprivate func setupTableView() {
