@@ -6,20 +6,49 @@
 //
 
 import UIKit
+import FeedKit
 
 class EpisodesController: UITableViewController {
     
     fileprivate let cellId = "cellId"
     
-    var episodes = [
-        Episode(title: "First Episode"),
-        Episode(title: "Second Episode"),
-        Episode(title: "Third Episode")
-    ]
+    var episodes = [Episode]()
     
     var podcast: Podcast? {
         didSet {
             navigationItem.title = podcast?.trackName
+            fetchEpisodes()
+        }
+    }
+    
+    fileprivate func fetchEpisodes() {
+        print("looking for episodes", podcast?.feedUrl ?? "")
+        guard let feedUrl = podcast?.feedUrl else { return }
+        let secureFeedUrl = feedUrl.contains("https") ? feedUrl : feedUrl.replacingOccurrences(of: "http", with: "https")
+        guard let url = URL(string: secureFeedUrl) else { return }
+        let parser = FeedParser(URL: url)
+        parser.parseAsync { (result) in
+            
+            switch result {
+            case .success(let feed):
+                switch feed {
+                case let .rss(feed):
+                    var episodes = [Episode]()
+                    feed.items?.forEach({ (feedItem) in
+                        let episode = Episode(title: feedItem.title ?? "")
+                        episodes.append(episode)
+                    })
+                    self.episodes = episodes
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                    break
+                default:
+                    print("Found a feed..")
+                }
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
