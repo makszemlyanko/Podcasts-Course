@@ -19,3 +19,7 @@ struct Podcast: Decodable {
     var trackCount: Int?
     var feedUrl: String?
 }
+
+struct Episode: Decodable {
+    var title: String?
+}

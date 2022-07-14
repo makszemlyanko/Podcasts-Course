@@ -10,7 +10,7 @@ import Alamofire
 
 class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     
-    let cellId = "cellId"
+    fileprivate let cellId = "cellId"
     
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     
@@ -41,6 +41,13 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - UITableView
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let episodesController = EpisodesController()
+        let podcast = self.podcasts[indexPath.row]
+        episodesController.podcast = podcast
+        navigationController?.pushViewController(episodesController, animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "Please enter a search term above"
@@ -52,11 +59,7 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if podcasts.count == 0 {
-            return 350
-        } else {
-            return 0
-        }
+        return podcasts.count == 0 ? 350 : 0
     }
     
     fileprivate func setupTableView() {
