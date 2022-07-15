@@ -19,6 +19,8 @@
 		15372879287FFB2900742456 /* EpisodesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15372878287FFB2900742456 /* EpisodesController.swift */; };
 		1537289B28814DF600742456 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1537289928814DF600742456 /* EpisodeCell.swift */; };
 		153728A228815E9700742456 /* EpisodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153728A128815E9700742456 /* EpisodeCell.xib */; };
+		153728A628816E1100742456 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153728A528816E1100742456 /* String.swift */; };
+		153728A928816F9B00742456 /* RSSFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153728A828816F9B00742456 /* RSSFeed.swift */; };
 		15830E91287C369E001D2583 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15830E90287C369D001D2583 /* APIService.swift */; };
 		15A26583287B0FDC00E6F03C /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A26582287B0FDC00E6F03C /* SearchResult.swift */; };
 		15D03FBF2876CF3600558AA0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D03FBE2876CF3600558AA0 /* MainTabBarController.swift */; };
@@ -40,6 +42,8 @@
 		15372878287FFB2900742456 /* EpisodesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesController.swift; sourceTree = "<group>"; };
 		1537289928814DF600742456 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
 		153728A128815E9700742456 /* EpisodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeCell.xib; sourceTree = "<group>"; };
+		153728A528816E1100742456 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		153728A828816F9B00742456 /* RSSFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeed.swift; sourceTree = "<group>"; };
 		15830E90287C369D001D2583 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		15A26582287B0FDC00E6F03C /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		15D03FBE2876CF3600558AA0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 		150DA2312876C98500690800 /* PodcastsCourse */ = {
 			isa = PBXGroup;
 			children = (
+				153728A428816E0400742456 /* Extensions */,
 				15830E8F287C368D001D2583 /* API */,
 				15368514287820E20022C6F1 /* Models */,
 				150DA24F2876CC8300690800 /* Views */,
@@ -147,6 +152,15 @@
 				153728A128815E9700742456 /* EpisodeCell.xib */,
 			);
 			path = Episodes;
+			sourceTree = "<group>";
+		};
+		153728A428816E0400742456 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				153728A528816E1100742456 /* String.swift */,
+				153728A828816F9B00742456 /* RSSFeed.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		15830E8F287C368D001D2583 /* API */ = {
@@ -290,7 +304,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				153728A928816F9B00742456 /* RSSFeed.swift in Sources */,
 				150DA2372876C98500690800 /* ViewController.swift in Sources */,
+				153728A628816E1100742456 /* String.swift in Sources */,
 				15830E91287C369E001D2583 /* APIService.swift in Sources */,
 				1537286F287D48F100742456 /* PodcastCell.swift in Sources */,
 				15A26583287B0FDC00E6F03C /* SearchResult.swift in Sources */,

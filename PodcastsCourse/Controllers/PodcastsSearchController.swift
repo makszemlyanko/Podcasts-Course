@@ -26,6 +26,8 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     fileprivate func setupSearchBar() {
         definesPresentationContext = true
         navigationItem.searchController = self.searchController
+        navigationItem.searchController?.searchBar.tintColor = .purple
+        navigationController?.navigationBar.tintColor = .purple
         navigationItem.hidesSearchBarWhenScrolling = false
         self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.searchBar.delegate = self
