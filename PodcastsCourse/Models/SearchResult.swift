@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FeedKit
 
 struct SearchResult: Decodable {
     let resultCount: Int
@@ -21,5 +22,13 @@ struct Podcast: Decodable {
 }
 
 struct Episode: Decodable {
-    var title: String?
+    let title: String
+    let pubDate: Date
+    let description: String
+    
+    init(feedItem: RSSFeedItem) {
+        self.title = feedItem.title ?? ""
+        self.pubDate = feedItem.pubDate ?? Date()
+        self.description = feedItem.description ?? ""
+    }
 }
