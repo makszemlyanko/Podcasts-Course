@@ -26,7 +26,6 @@ class APIService {
                 case let .rss(feed):
                     let episodes = feed.toEpisodes()
                     comleptionHandler(episodes)
-                    break
                 default:
                     print("Found a feed..")
                 }
