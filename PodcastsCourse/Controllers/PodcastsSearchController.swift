@@ -26,8 +26,8 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     fileprivate func setupSearchBar() {
         definesPresentationContext = true
         navigationItem.searchController = self.searchController
-        navigationItem.searchController?.searchBar.tintColor = .purple
-        navigationController?.navigationBar.tintColor = .purple
+        navigationItem.searchController?.searchBar.tintColor = .systemPurple
+        navigationController?.navigationBar.tintColor = .systemPurple
         navigationItem.hidesSearchBarWhenScrolling = false
         self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.searchBar.delegate = self
@@ -55,7 +55,7 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
         label.text = "Please enter a search term above"
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 20)
-        label.textColor = .purple
+        label.textColor = .systemPurple
         label.isHidden = podcasts.count != 0
         return label
     }

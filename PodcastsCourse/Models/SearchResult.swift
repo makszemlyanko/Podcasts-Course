@@ -23,6 +23,7 @@ struct Podcast: Decodable {
 
 struct Episode: Decodable {
     let title: String
+    let author: String
     let pubDate: Date
     let description: String
     var imageUrl: String?
@@ -32,5 +33,6 @@ struct Episode: Decodable {
         self.pubDate = feedItem.pubDate ?? Date()
         self.description = feedItem.iTunes?.iTunesSubtitle ?? feedItem.description ?? ""
         self.imageUrl = feedItem.iTunes?.iTunesImage?.attributes?.href
+        self.author = feedItem.iTunes?.iTunesAuthor ?? ""
     }
 }
