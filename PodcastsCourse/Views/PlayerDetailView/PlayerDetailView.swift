@@ -30,6 +30,7 @@ class PlayerDetailView: UIView {
 
     // MARK: - IB Outlets and IB Actions
     
+    // Image
     @IBOutlet weak var episodeImageView: UIImageView! {
         didSet {
             episodeImageView.transform = shrunkenTransform
@@ -38,17 +39,24 @@ class PlayerDetailView: UIView {
         }
     }
     
-    @IBOutlet weak var episodeTitleLabel: UILabel! {
+    // Title
+    @IBOutlet weak var episodeTitleLabel: UILabel!
+    @IBOutlet weak var episodeAuthorLabel: UILabel!
+    
+    // Duration
+    @IBOutlet weak var currentTimeLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var episodeDurationSlider: UISlider! {
         didSet {
-            episodeTitleLabel.numberOfLines = 2
+            episodeDurationSlider.tintColor = .systemPurple
         }
     }
     
-    @IBOutlet weak var episodeAuthorLabel: UILabel!
-    
-    @IBOutlet weak var episodeDuration: UISlider! {
+    // Control buttons
+    @IBOutlet weak var playPauseButton: UIButton! {
         didSet {
-            episodeDuration.tintColor = .systemPurple
+            playPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+            playPauseButton.addTarget(self, action: #selector(handlePlayPause), for: .touchUpInside)
         }
     }
     
@@ -58,21 +66,36 @@ class PlayerDetailView: UIView {
         }
     }
     
-    @IBOutlet weak var playPauseButton: UIButton! {
-        didSet {
-            playPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
-            playPauseButton.addTarget(self, action: #selector(handlePlayPause), for: .touchUpInside)
-        }
-    }
+
     
     @IBAction func handleDismiss(_ sender: Any) {
         player.pause()
         self.removeFromSuperview()
     }
     
+    fileprivate func observePlayerCurrentTime() {
+        let interval = CMTimeMake(value: 1, timescale: 2)
+        player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { (time) in
+            self.currentTimeLabel.text = time.toDisplayString()
+            let durationtime = self.player.currentItem?.duration
+            self.durationLabel.text = durationtime?.toDisplayString()
+            self.updateCurrentTimeSlider()
+        }
+    }
+    
+    fileprivate func updateCurrentTimeSlider() {
+        let currentTimeSeconds = CMTimeGetSeconds(player.currentTime())
+        let durationSeconds = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(value: 1, timescale: 1 ))
+        let percentage = currentTimeSeconds / durationSeconds
+        self.episodeDurationSlider.value = Float(percentage) 
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        let time = CMTime(value: 1, timescale: 3)
+    
+        observePlayerCurrentTime()
+        
+        let time = CMTimeMake(value: 1, timescale: 3)
         let times = [NSValue(time: time)]
         player.addBoundaryTimeObserver(forTimes: times, queue: .main) {
             print("episode started playing")
