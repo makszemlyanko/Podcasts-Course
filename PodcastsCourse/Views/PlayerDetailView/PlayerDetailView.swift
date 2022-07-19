@@ -14,11 +14,8 @@ class PlayerDetailView: UIView {
         didSet {
             episodeAuthorLabel.text = episode.author
             episodeTitleLabel.text = episode.title
-            episodeTitleLabel.numberOfLines = 2
             guard let url = URL(string: episode.imageUrl?.toSecureHTTPS() ?? "") else { return } // episode image
             episodeImageView.sd_setImage(with: url, completed: nil)
-            episodeImageView.contentMode = .scaleAspectFill
-            episodeImageView.layer.cornerRadius = 8
             playEpisode()
         }
     }
@@ -28,10 +25,25 @@ class PlayerDetailView: UIView {
         avp.automaticallyWaitsToMinimizeStalling = false
         return avp
     }()
+    
+    fileprivate let shrunkenTransform = CGAffineTransform(scaleX: 0.7, y: 0.7)
 
-    // MARK: - IB Outlets
-    @IBOutlet weak var episodeImageView: UIImageView!
-    @IBOutlet weak var episodeTitleLabel: UILabel!
+    // MARK: - IB Outlets and IB Actions
+    
+    @IBOutlet weak var episodeImageView: UIImageView! {
+        didSet {
+            episodeImageView.transform = shrunkenTransform
+            episodeImageView.contentMode = .scaleAspectFill
+            episodeImageView.layer.cornerRadius = 8
+        }
+    }
+    
+    @IBOutlet weak var episodeTitleLabel: UILabel! {
+        didSet {
+            episodeTitleLabel.numberOfLines = 2
+        }
+    }
+    
     @IBOutlet weak var episodeAuthorLabel: UILabel!
     
     @IBOutlet weak var episodeDuration: UISlider! {
@@ -53,16 +65,31 @@ class PlayerDetailView: UIView {
         }
     }
     
+    @IBAction func handleDismiss(_ sender: Any) {
+        player.pause()
+        self.removeFromSuperview()
+    }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        let time = CMTime(value: 1, timescale: 3)
+        let times = [NSValue(time: time)]
+        player.addBoundaryTimeObserver(forTimes: times, queue: .main) {
+            print("episode started playing")
+            self.enlargeEpisodeImageView()
+        }
+    }
     
     @objc fileprivate func handlePlayPause() {
         print("play and pause button")
         if player.timeControlStatus == .paused {
             player.play()
             playPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+            enlargeEpisodeImageView()
         } else {
             player.pause()
             playPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+            shrinkEpisodeImageView()
         }
     }
     
@@ -74,8 +101,19 @@ class PlayerDetailView: UIView {
         player.play()
     }
     
-    // MARK: - IB Actions
-    @IBAction func handleDismiss(_ sender: Any) {
-        self.removeFromSuperview()
+    // MARK: - Episode image animate
+    
+    fileprivate func shrinkEpisodeImageView() {
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseOut) {
+            self.episodeImageView.transform = self.shrunkenTransform
+        }
     }
+    
+    fileprivate func enlargeEpisodeImageView() {
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseOut) {
+            self.episodeImageView.transform = .identity
+        }
+    }
+    
+
 }

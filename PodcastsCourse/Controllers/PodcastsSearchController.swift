@@ -20,6 +20,7 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         setupTableView()
         setupSearchBar()
+        searchBar(searchController.searchBar, textDidChange: "Ted")
     }
     
     // MARK: - Search Bar
