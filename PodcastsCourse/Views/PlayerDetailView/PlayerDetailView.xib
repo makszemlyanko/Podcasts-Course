@@ -94,25 +94,28 @@
                                     <rect key="frame" x="0.0" y="0.0" width="52.5" height="206"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upg-s3-EMk">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upg-s3-EMk">
                                     <rect key="frame" x="52.5" y="0.0" width="52" height="206"/>
-                                    <state key="normal" title="Button" image="rewind15"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="rewind15"/>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mKO-U8-Grn">
                                     <rect key="frame" x="104.5" y="0.0" width="52.5" height="206"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iU5-Oj-jID">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iU5-Oj-jID">
                                     <rect key="frame" x="157" y="0.0" width="52" height="206"/>
-                                    <state key="normal" title="Button" image="play"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="play"/>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g26-2W-OdI">
                                     <rect key="frame" x="209" y="0.0" width="52.5" height="206"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjF-sb-ExF">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjF-sb-ExF">
                                     <rect key="frame" x="261.5" y="0.0" width="52" height="206"/>
-                                    <state key="normal" title="Button" image="fastforward15"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="fastforward15"/>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7Z-iH-YmF">
                                     <rect key="frame" x="313.5" y="0.0" width="52.5" height="206"/>
@@ -154,6 +157,7 @@
                 <outlet property="episodeImageView" destination="5my-au-hAx" id="KXZ-A9-Qho"/>
                 <outlet property="episodeTitleLabel" destination="RCN-0Y-hNq" id="kvc-Pe-TvH"/>
                 <outlet property="episodeVolume" destination="98l-NN-eXf" id="TEI-FE-3Sb"/>
+                <outlet property="playPauseButton" destination="iU5-Oj-jID" id="Nnu-LG-AHR"/>
             </connections>
             <point key="canvasLocation" x="-126" y="-3"/>
         </view>
