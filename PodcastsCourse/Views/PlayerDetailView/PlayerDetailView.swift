@@ -28,7 +28,7 @@ class PlayerDetailView: UIView {
     
     fileprivate let shrunkenTransform = CGAffineTransform(scaleX: 0.7, y: 0.7)
 
-    // MARK: - IB Outlets and IB Actions
+    // MARK: - IB Outlets
     
     // Image
     @IBOutlet weak var episodeImageView: UIImageView! {
@@ -66,11 +66,40 @@ class PlayerDetailView: UIView {
         }
     }
     
-
+    // MARK: - IB Actions
+    
+    @IBAction func handleCurrentTimeSlider(_ sender: Any) {
+        let percentage = episodeDurationSlider.value
+        guard let duration = player.currentItem?.duration else { return }
+        let durationInSeconds = CMTimeGetSeconds(duration)
+        let seekTimeInSeconds = Float64(percentage) * durationInSeconds
+        let seekTime = CMTimeMakeWithSeconds(seekTimeInSeconds, preferredTimescale: 1)
+        player.seek(to: seekTime)
+    }
+    
+    @IBAction func handleRewind(_ sender: Any) {
+        seekToCurrentTime(delta: -15)
+    }
+    
+    @IBAction func handleFastForward(_ sender: Any) {
+        seekToCurrentTime(delta: 15)
+    }
+    
+    @IBAction func handleVolume(_ sender: UISlider) {
+        player.volume = episodeVolume.value
+    }
     
     @IBAction func handleDismiss(_ sender: Any) {
         player.pause()
         self.removeFromSuperview()
+    }
+    
+    // MARK: - Another methods
+    
+    fileprivate func seekToCurrentTime(delta: Int64) {
+        let fifteenSeconds = CMTimeMake(value: delta, timescale: 1)
+        let seekTime = CMTimeAdd(player.currentTime(), fifteenSeconds)
+        player.seek(to: seekTime)
     }
     
     fileprivate func observePlayerCurrentTime() {
@@ -87,7 +116,7 @@ class PlayerDetailView: UIView {
         let currentTimeSeconds = CMTimeGetSeconds(player.currentTime())
         let durationSeconds = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(value: 1, timescale: 1 ))
         let percentage = currentTimeSeconds / durationSeconds
-        self.episodeDurationSlider.value = Float(percentage) 
+        self.episodeDurationSlider.value = Float(percentage)
     }
     
     override func awakeFromNib() {
@@ -124,7 +153,7 @@ class PlayerDetailView: UIView {
         player.play()
     }
     
-    // MARK: - Episode image animate
+    // MARK: - Episode image animating
     
     fileprivate func shrinkEpisodeImageView() {
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseOut) {
