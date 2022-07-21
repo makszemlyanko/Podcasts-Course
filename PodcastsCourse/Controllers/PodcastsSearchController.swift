@@ -16,6 +16,8 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     
     var podcasts = [Podcast]()
     
+    var timer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -35,11 +37,13 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // implement Alamofire to search iTunes API
-        APIService.shared.fetchPodacasts(searchText: searchText) { (podcasts) in
-            self.podcasts = podcasts
-            self.tableView.reloadData()
-        }
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            APIService.shared.fetchPodacasts(searchText: searchText) { (podcasts) in
+                self.podcasts = podcasts
+                self.tableView.reloadData()
+            }
+        })
     }
     
     // MARK: - UITableView

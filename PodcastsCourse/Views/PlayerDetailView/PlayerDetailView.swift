@@ -27,6 +27,10 @@ class PlayerDetailView: UIView {
     }()
     
     fileprivate let shrunkenTransform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+    
+    deinit {
+        print("PlayerDetailView memory being reclaimed...")
+    }
 
     // MARK: - IB Outlets
     
@@ -90,7 +94,6 @@ class PlayerDetailView: UIView {
     }
     
     @IBAction func handleDismiss(_ sender: Any) {
-        player.pause()
         self.removeFromSuperview()
     }
     
@@ -104,11 +107,11 @@ class PlayerDetailView: UIView {
     
     fileprivate func observePlayerCurrentTime() {
         let interval = CMTimeMake(value: 1, timescale: 2)
-        player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { (time) in
-            self.currentTimeLabel.text = time.toDisplayString()
-            let durationtime = self.player.currentItem?.duration
-            self.durationLabel.text = durationtime?.toDisplayString()
-            self.updateCurrentTimeSlider()
+        player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] (time) in
+            self?.currentTimeLabel.text = time.toDisplayString()
+            let durationtime = self?.player.currentItem?.duration
+            self?.durationLabel.text = durationtime?.toDisplayString()
+            self?.updateCurrentTimeSlider()
         }
     }
     
@@ -126,9 +129,10 @@ class PlayerDetailView: UIView {
         
         let time = CMTimeMake(value: 1, timescale: 3)
         let times = [NSValue(time: time)]
-        player.addBoundaryTimeObserver(forTimes: times, queue: .main) {
+        
+        player.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
             print("episode started playing")
-            self.enlargeEpisodeImageView()
+            self?.enlargeEpisodeImageView()
         }
     }
     
