@@ -28,6 +28,10 @@ class PlayerDetailView: UIView {
     
     fileprivate let shrunkenTransform = CGAffineTransform(scaleX: 0.7, y: 0.7)
     
+    static func initFromNib() -> PlayerDetailView {
+        return Bundle.main.loadNibNamed("PlayerDetailView", owner: self, options: nil)?.first as! PlayerDetailView
+    }
+    
     deinit {
         print("PlayerDetailView memory being reclaimed...")
     }
