@@ -98,7 +98,8 @@ class PlayerDetailView: UIView {
     }
     
     @IBAction func handleDismiss(_ sender: Any) {
-        self.removeFromSuperview()
+        let mainTabBarController = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? MainTabBarController
+        mainTabBarController?.minimizePlayerDetail()
     }
     
     // MARK: - Another methods
@@ -129,6 +130,8 @@ class PlayerDetailView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
     
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximize)))
+        
         observePlayerCurrentTime()
         
         let time = CMTimeMake(value: 1, timescale: 3)
@@ -138,6 +141,11 @@ class PlayerDetailView: UIView {
             print("episode started playing")
             self?.enlargeEpisodeImageView()
         }
+    }
+    
+    @objc func handleTapMaximize() {
+        let mainTabBarController = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? MainTabBarController
+        mainTabBarController?.maximizePlayerDetail(episode: nil)
     }
     
     @objc fileprivate func handlePlayPause() {
