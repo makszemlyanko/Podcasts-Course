@@ -53,13 +53,23 @@
                                 </button>
                             </subviews>
                         </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JMf-8q-5wF">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.5"/>
+                            <color key="backgroundColor" systemColor="systemGray3Color"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="gB5-YU-H9a"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="ahP-uR-bBa" secondAttribute="trailing" constant="8" id="51h-AH-gWp"/>
                         <constraint firstAttribute="height" constant="64" id="7ks-VB-CdT"/>
+                        <constraint firstAttribute="trailing" secondItem="JMf-8q-5wF" secondAttribute="trailing" id="I7V-PO-Ma9"/>
+                        <constraint firstItem="JMf-8q-5wF" firstAttribute="top" secondItem="R7l-nz-McD" secondAttribute="top" id="Jgy-jD-GH4"/>
                         <constraint firstItem="ahP-uR-bBa" firstAttribute="leading" secondItem="R7l-nz-McD" secondAttribute="leading" constant="8" id="XDd-dp-V1n"/>
                         <constraint firstAttribute="bottom" secondItem="ahP-uR-bBa" secondAttribute="bottom" constant="8" id="ZqD-lb-H8j"/>
+                        <constraint firstItem="JMf-8q-5wF" firstAttribute="leading" secondItem="R7l-nz-McD" secondAttribute="leading" id="bmG-Mg-IP3"/>
                         <constraint firstItem="ahP-uR-bBa" firstAttribute="top" secondItem="R7l-nz-McD" secondAttribute="top" constant="8" id="wr9-Xr-72S"/>
                     </constraints>
                 </view>
@@ -245,6 +255,9 @@
         <image name="rewind15" width="45.5" height="45.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
             <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
