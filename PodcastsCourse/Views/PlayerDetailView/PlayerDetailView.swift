@@ -14,11 +14,14 @@ class PlayerDetailView: UIView {
         didSet {
             episodeAuthorLabel.text = episode.author
             episodeTitleLabel.text = episode.title
+            miniEpisodeTitleLabel.text = episode.title
+            playEpisode()
             guard let url = URL(string: episode.imageUrl?.toSecureHTTPS() ?? "") else { return } // episode image
             episodeImageView.sd_setImage(with: url, completed: nil)
-            playEpisode()
+            miniEpisodeImageView.sd_setImage(with: url, completed: nil)
         }
     }
+    
     
     let player: AVPlayer = {
         let avp = AVPlayer()
@@ -38,7 +41,30 @@ class PlayerDetailView: UIView {
 
     // MARK: - IB Outlets
     
-    // Image
+    // Mini episode player view
+    @IBOutlet weak var miniEpisodeImageView: UIImageView! {
+        didSet {
+            miniEpisodeImageView.contentMode = .scaleAspectFill
+        }
+    }
+    @IBOutlet weak var miniEpisodeTitleLabel: UILabel!
+    @IBOutlet weak var miniPlayPauseButton: UIButton! {
+        didSet {
+            miniPlayPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+            miniPlayPauseButton.addTarget(self, action: #selector(handlePlayPause), for: .touchUpInside)
+        }
+    }
+    @IBOutlet weak var miniFastForwardButton: UIButton! {
+        didSet {
+            miniFastForwardButton.imageEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
+            miniFastForwardButton.addTarget(self, action: #selector(handleFastForward(_:)), for: .touchUpInside)
+        }
+    }
+    
+    @IBOutlet weak var miniPlayerView: UIView!
+    @IBOutlet weak var maximizedStackView: UIStackView!
+    
+    // Maxi episode player view
     @IBOutlet weak var episodeImageView: UIImageView! {
         didSet {
             episodeImageView.transform = shrunkenTransform
@@ -47,11 +73,9 @@ class PlayerDetailView: UIView {
         }
     }
     
-    // Title
     @IBOutlet weak var episodeTitleLabel: UILabel!
     @IBOutlet weak var episodeAuthorLabel: UILabel!
     
-    // Duration
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var episodeDurationSlider: UISlider! {
@@ -60,7 +84,6 @@ class PlayerDetailView: UIView {
         }
     }
     
-    // Control buttons
     @IBOutlet weak var playPauseButton: UIButton! {
         didSet {
             playPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
@@ -153,10 +176,12 @@ class PlayerDetailView: UIView {
         if player.timeControlStatus == .paused {
             player.play()
             playPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+            miniPlayPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
             enlargeEpisodeImageView()
         } else {
             player.pause()
             playPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+            miniPlayPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
             shrinkEpisodeImageView()
         }
     }

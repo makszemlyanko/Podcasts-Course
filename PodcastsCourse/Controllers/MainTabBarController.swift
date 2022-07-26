@@ -19,20 +19,23 @@ class MainTabBarController: UITabBarController {
         
         setupViewControllers()
         
-        setupPlayerDetailView()    }
+        setupPlayerDetailView()
+        
+    }
     
     // MARK: - Setup Functions
     
     let playerDetailView = PlayerDetailView.initFromNib()
     
     @objc func minimizePlayerDetail() {
-        
         maximizedTopAnchorConstraint.isActive = false
         minimizedTopAnchorConstraint.isActive = true
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut) {
             self.view.layoutIfNeeded()
             self.tabBar.isHidden = false
+            self.playerDetailView.maximizedStackView.alpha = 0
+            self.playerDetailView.miniPlayerView.alpha = 1
         }
     }
     
@@ -46,6 +49,8 @@ class MainTabBarController: UITabBarController {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut) {
             self.view.layoutIfNeeded()
             self.tabBar.isHidden = true
+            self.playerDetailView.maximizedStackView.alpha = 1
+            self.playerDetailView.miniPlayerView.alpha = 0
         }
     }
     
@@ -60,7 +65,6 @@ class MainTabBarController: UITabBarController {
         maximizedTopAnchorConstraint = playerDetailView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height)
         maximizedTopAnchorConstraint.isActive = true
         minimizedTopAnchorConstraint = playerDetailView.topAnchor.constraint(equalTo: tabBar.topAnchor, constant: -64)
-//        minimizedTopAnchorConstraint.isActive = true
         
     
         playerDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
