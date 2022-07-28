@@ -127,7 +127,6 @@ class PlayerDetailView: UIView {
     }
     
     // MARK: - Another methods
-
     fileprivate func seekToCurrentTime(delta: Int64) {
         let fifteenSeconds = CMTimeMake(value: delta, timescale: 1)
         let seekTime = CMTimeAdd(player.currentTime(), fifteenSeconds)

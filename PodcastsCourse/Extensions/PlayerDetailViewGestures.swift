@@ -56,3 +56,4 @@ extension PlayerDetailView {
     @objc func handleTapMaximize() {        UIApplication.mainTabBarController()?.maximizePlayerDetail(episode: nil)
     }
 }
+
