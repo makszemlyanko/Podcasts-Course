@@ -9,6 +9,8 @@ import UIKit
 
 class FavoritesController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    let cellId = "cellId"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,8 +18,8 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     fileprivate func setupCollectionView() {
-        collectionView.backgroundColor = .systemPink
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView.backgroundColor = .white
+        collectionView.register(FavoritesViewCell.self, forCellWithReuseIdentifier: cellId)
     }
     
     // MARK: - UICollectionView Delegate / Spacing methods
@@ -27,15 +29,14 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = .systemGreen
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (view.frame.width - 16 * 3) / 2
         let height = width
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: height + 46)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
