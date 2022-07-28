@@ -29,11 +29,12 @@ class MainTabBarController: UITabBarController {
     let playerDetailView = PlayerDetailView.initFromNib()
     
     @objc func minimizePlayerDetail() {
+        print("minimize")
         maximizedTopAnchorConstraint.isActive = false
         bottomAnchorConstraint.constant = view.frame.height
         minimizedTopAnchorConstraint.isActive = true
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {
             self.view.layoutIfNeeded()
             self.tabBar.isHidden = false
             self.playerDetailView.maximizedStackView.alpha = 0
@@ -42,6 +43,8 @@ class MainTabBarController: UITabBarController {
     }
     
     func maximizePlayerDetail(episode: Episode?) {
+        print("maximize")
+        self.playerDetailView.miniPlayerView.alpha = 0
         minimizedTopAnchorConstraint.isActive = false
         maximizedTopAnchorConstraint.isActive = true
         maximizedTopAnchorConstraint.constant = 0
@@ -49,11 +52,10 @@ class MainTabBarController: UITabBarController {
         if episode != nil {
             playerDetailView.episode = episode
         }
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {
             self.view.layoutIfNeeded()
             self.tabBar.isHidden = true
             self.playerDetailView.maximizedStackView.alpha = 1
-            self.playerDetailView.miniPlayerView.alpha = 0
         }
     }
     
@@ -77,10 +79,6 @@ class MainTabBarController: UITabBarController {
         playerDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         
         playerDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            
-        
-        
-        
     }
     
     fileprivate func setupViewControllers() {
