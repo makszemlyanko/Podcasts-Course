@@ -57,4 +57,10 @@ class APIService {
             }
         }
     }
+    
+    struct SearchResult: Decodable {
+        var resultCount: Int
+        var results: [Podcast]
+    }
+
 }
