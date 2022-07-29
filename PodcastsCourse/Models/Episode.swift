@@ -1,25 +1,12 @@
 //
-//  v.swift
+//  Episode.swift
 //  PodcastsCourse
 //
-//  Created by Maks Kokos on 10.07.2022.
+//  Created by Maks Kokos on 29.07.2022.
 //
 
 import Foundation
 import FeedKit
-
-struct SearchResult: Decodable {
-    let resultCount: Int
-    let results: [Podcast]
-}
-
-struct Podcast: Decodable {
-    var trackName: String?
-    var artistName: String?
-    var artworkUrl600: String?
-    var trackCount: Int?
-    var feedUrl: String?
-}
 
 struct Episode: Decodable {
     let title: String
