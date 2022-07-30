@@ -8,7 +8,6 @@
 import AVKit
 
 extension CMTime {
-    
     func toDisplayString() -> String {
         if CMTimeGetSeconds(self).isNaN {
             return "--:--"

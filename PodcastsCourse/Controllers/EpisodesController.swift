@@ -21,7 +21,6 @@ class EpisodesController: UITableViewController {
         }
     }
     
-
     fileprivate func fetchEpisodes() {
         print("looking for episodes", podcast?.feedUrl ?? "")
         guard let feedUrl = podcast?.feedUrl else { return }
@@ -55,7 +54,6 @@ class EpisodesController: UITableViewController {
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleSaveFavorite))
             ]
     }
-    
     
     @objc func handleFetchSavedPodcast() {
         print(#function)
