@@ -11,7 +11,6 @@ import FeedKit
 class EpisodesController: UITableViewController {
     
     fileprivate let cellId = "cellId"
-    fileprivate let favoritePodcastKey = "favoritePodcastKey"
     
     var episodes = [Episode]()
     
@@ -51,55 +50,38 @@ class EpisodesController: UITableViewController {
     // MARK: - NavigationBar Buttons
     
     fileprivate func setupNavigationBarButtons() {
-        navigationItem.rightBarButtonItem =
-            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddToFavorites))
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleFetchSavedPodcast)),
+            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleSaveFavorite))
+            ]
     }
     
-    @objc func handleAddToFavorites() {
-        handleFetchSavedPodcast()
-        handleFetchSavedPodcast()
-    }
     
-    func handleFetchSavedPodcast() {
+    @objc func handleFetchSavedPodcast() {
         print(#function)
-        guard let data = UserDefaults.standard.data(forKey: favoritePodcastKey) else { return }
+        guard let data = UserDefaults.standard.data(forKey: UserDefaults.favoritePodcastKey) else { return }
         do {
-            let savedPodcasts = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [Podcast.self], from: data) as? [Podcast]
+            let savedPodcasts = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Podcast]
             savedPodcasts?.forEach({ (p) in
-                print(p.trackName ?? "")
+                print(p.trackName ?? "", p.artworkUrl600 ?? "image", p.artistName ?? "NAME")
             })
-            print(podcast?.artistName ?? "", podcast?.trackName ?? "")
         } catch let error {
             print(error)
         }
     }
     
-        func handleSaveFavorite() {
-            print(#function)
-            guard let podcast = self.podcast else { return }
-
-            // fetch our saved podcast first
-            guard let savedPodcastData = UserDefaults.standard.data(forKey: favoritePodcastKey) else { return }
-             
-            do {
-                guard let savedPodcast = try NSKeyedUnarchiver.unarchivedArrayOfObjects(ofClass: Podcast.self, from: savedPodcastData) else { return }
-                var listOfPodcasts = savedPodcast
-                listOfPodcasts.append(podcast)
-            } catch let error {
-                print(error)
-            }
-            
-            #warning("continue here")
-            // transform Podcast into Data
-            
-            
-//            do {
-//                let data = try NSKeyedArchiver.archivedData(withRootObject: listOfPodcasts, requiringSecureCoding: true)
-//                UserDefaults.standard.setValue(data, forKey: favoritePodcastKey)
-//            } catch let error {
-//                print(error)
-//            }
+    @objc func handleSaveFavorite() {
+        print(#function)
+        guard let podcast = self.podcast else { return }
+        do {
+            var listOfPodcasts = UserDefaults.standard.savedPodcasts()
+            listOfPodcasts.append(podcast)
+            let data = try NSKeyedArchiver.archivedData(withRootObject: listOfPodcasts, requiringSecureCoding: true)
+            UserDefaults.standard.setValue(data, forKey: UserDefaults.favoritePodcastKey)
+        } catch let error {
+            print(error)
         }
+    }
     
     // MARK: - UITableView
     

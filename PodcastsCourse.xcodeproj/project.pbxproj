@@ -26,6 +26,7 @@
 		153728B12883F16F00742456 /* PlayerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153728B02883F16F00742456 /* PlayerDetailView.swift */; };
 		153D50752893C7570062FB0C /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153D50742893C7570062FB0C /* Podcast.swift */; };
 		153D50782893C75F0062FB0C /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153D50772893C75F0062FB0C /* Episode.swift */; };
+		153D507C289511280062FB0C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153D507B289511280062FB0C /* UserDefaults.swift */; };
 		154CDD1F28926EB300DE7D2D /* PlayerDetailViewGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154CDD1E28926EB300DE7D2D /* PlayerDetailViewGestures.swift */; };
 		154CDD2328927FDE00DE7D2D /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154CDD2228927FDE00DE7D2D /* UIApplication.swift */; };
 		154CDD2628928B2200DE7D2D /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154CDD2528928B2200DE7D2D /* FavoritesController.swift */; };
@@ -57,6 +58,7 @@
 		153728B02883F16F00742456 /* PlayerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailView.swift; sourceTree = "<group>"; };
 		153D50742893C7570062FB0C /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		153D50772893C75F0062FB0C /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		153D507B289511280062FB0C /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		154CDD1E28926EB300DE7D2D /* PlayerDetailViewGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewGestures.swift; sourceTree = "<group>"; };
 		154CDD2228927FDE00DE7D2D /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		154CDD2528928B2200DE7D2D /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				1531FA6A2886EDFD00488F24 /* CMTime.swift */,
 				154CDD1E28926EB300DE7D2D /* PlayerDetailViewGestures.swift */,
 				154CDD2228927FDE00DE7D2D /* UIApplication.swift */,
+				153D507B289511280062FB0C /* UserDefaults.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				1537289B28814DF600742456 /* EpisodeCell.swift in Sources */,
 				15D03FBF2876CF3600558AA0 /* MainTabBarController.swift in Sources */,
 				154CDD2A28929B6100DE7D2D /* FavoritesViewCell.swift in Sources */,
+				153D507C289511280062FB0C /* UserDefaults.swift in Sources */,
 				1536851228781FE90022C6F1 /* PodcastsSearchController.swift in Sources */,
 				150DA2352876C98500690800 /* SceneDelegate.swift in Sources */,
 				15372879287FFB2900742456 /* EpisodesController.swift in Sources */,
