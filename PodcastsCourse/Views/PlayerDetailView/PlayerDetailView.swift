@@ -16,10 +16,20 @@ class PlayerDetailView: UIView {
             episodeAuthorLabel.text = episode.author
             episodeTitleLabel.text = episode.title
             miniEpisodeTitleLabel.text = episode.title
+            setupNowPlayingInfo()
             playEpisode()
             guard let url = URL(string: episode.imageUrl?.toSecureHTTPS() ?? "") else { return } // episode image
             episodeImageView.sd_setImage(with: url, completed: nil)
             miniEpisodeImageView.sd_setImage(with: url, completed: nil)
+            miniEpisodeImageView.sd_setImage(with: url) { (image, _, _, _) in
+                guard let image = image else { return  }
+                var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo
+                let artWork = MPMediaItemArtwork(boundsSize: image.size) { (_) -> UIImage in
+                    return image
+                }
+                nowPlayingInfo?[MPMediaItemPropertyArtwork] = artWork
+                MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+            }
         }
     }
     
@@ -139,8 +149,19 @@ class PlayerDetailView: UIView {
             self?.currentTimeLabel.text = time.toDisplayString()
             let durationtime = self?.player.currentItem?.duration
             self?.durationLabel.text = durationtime?.toDisplayString()
+            self?.setupLockscreenCurrentTime()
             self?.updateCurrentTimeSlider()
         }
+    }
+    
+    fileprivate func setupLockscreenCurrentTime() {
+        var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo
+        guard let currentItem = player.currentItem else { return }
+        let durationInSeconds = CMTimeGetSeconds(currentItem.duration)
+        let elapseTime = CMTimeGetSeconds(player.currentTime())
+        nowPlayingInfo?[MPNowPlayingInfoPropertyElapsedPlaybackTime] = elapseTime
+        nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = durationInSeconds
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
     
     fileprivate func updateCurrentTimeSlider() {
@@ -175,6 +196,8 @@ class PlayerDetailView: UIView {
             self?.enlargeEpisodeImageView()  
         }
     }
+    
+    // MARK: - Background Audio Mode
     
     fileprivate func setupRemoteControls() {
         UIApplication.shared.beginReceivingRemoteControlEvents()
@@ -211,6 +234,15 @@ class PlayerDetailView: UIView {
         } catch let sessionError {
             print("Failed to activate session: \(sessionError)")
         }
+    }
+    
+    // MARK: - Playing Mode On The Lockscreen
+    
+    fileprivate func setupNowPlayingInfo() {
+        var nowPlaingInfo = [String: Any]()
+        nowPlaingInfo[MPMediaItemPropertyTitle] = episode.title
+        nowPlaingInfo[MPMediaItemPropertyArtist] = episode.author
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlaingInfo
     }
     
     @objc fileprivate func handlePlayPause() {
