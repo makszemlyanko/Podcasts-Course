@@ -75,20 +75,20 @@ class MainTabBarController: UITabBarController {
         
         minimizedTopAnchorConstraint = playerDetailView.topAnchor.constraint(equalTo: tabBar.topAnchor, constant: -64)
         
-    
         playerDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         
         playerDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
     fileprivate func setupViewControllers() {
-         let layout = UICollectionViewFlowLayout()
-         let favoritesController = FavoritesController(collectionViewLayout: layout)
-         viewControllers = [
+        let layout = UICollectionViewFlowLayout()
+        let favoritesController = FavoritesController(collectionViewLayout: layout)
+        viewControllers = [
             createNavContoller(for: PodcastsSearchController(), title: "Search", image: #imageLiteral(resourceName: "search")),
-             createNavContoller(for: favoritesController, title: "Favorites", image: #imageLiteral(resourceName: "favorites")),             createNavContoller(for: ViewController(), title: "Downloads", image: #imageLiteral(resourceName: "downloads"))
-         ]
-     }
+            createNavContoller(for: favoritesController, title: "Favorites", image: #imageLiteral(resourceName: "favorites")),
+            createNavContoller(for: ViewController(), title: "Downloads", image: #imageLiteral(resourceName: "downloads"))
+        ]
+    }
     
     fileprivate func createNavContoller(for rootViewController: UIViewController, title: String, image: UIImage) -> UIViewController {
         let navController = UINavigationController(rootViewController: rootViewController)

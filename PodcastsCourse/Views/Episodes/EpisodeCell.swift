@@ -17,7 +17,7 @@ class EpisodeCell: UITableViewCell {
             let dateFormatter = DateFormatter() // date sittings
             dateFormatter.dateFormat = "MMM, dd, yyyy"
             pubDateLabel.text = dateFormatter.string(from: episode.pubDate)
-            episodeImageView.contentMode = .scaleAspectFill
+            episodeImageView.contentMode = .scaleAspectFit
             episodeImageView.layer.cornerRadius = 8
             guard let url = URL(string: episode.imageUrl?.toSecureHTTPS() ?? "") else { return } // episode image
             episodeImageView.sd_setImage(with: url, completed: nil)
@@ -25,7 +25,7 @@ class EpisodeCell: UITableViewCell {
     }
 
     @IBOutlet weak var episodeImageView: UIImageView!
-    
+
     @IBOutlet weak var pubDateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {

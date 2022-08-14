@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class Podcast: NSObject, NSCoding, NSSecureCoding, Decodable {
     
     static var supportsSecureCoding: Bool = true
@@ -17,7 +16,6 @@ class Podcast: NSObject, NSCoding, NSSecureCoding, Decodable {
     var artworkUrl600: String?
     var trackCount: Int?
     var feedUrl: String?
-    
     
     func encode(with coder: NSCoder) {
         coder.encode(trackName ?? "", forKey: "trackNameKey")
@@ -30,6 +28,5 @@ class Podcast: NSObject, NSCoding, NSSecureCoding, Decodable {
         self.artistName = coder.decodeObject(forKey: "artistName") as? String
         self.artworkUrl600 = coder.decodeObject(forKey: "artworkUrl600") as? String
     }
-
 
 }

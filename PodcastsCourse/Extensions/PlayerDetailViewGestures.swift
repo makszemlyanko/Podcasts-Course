@@ -45,15 +45,13 @@ extension PlayerDetailView {
             let translation = gesture.translation(in: self.superview)
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {
                 self.maximizedStackView.transform = .identity
-                if translation.y > 70  {
+                if translation.y > 70 {
                     UIApplication.mainTabBarController()?.minimizePlayerDetail()
                 }
             }
         }
     }
 
-
     @objc func handleTapMaximize() {        UIApplication.mainTabBarController()?.maximizePlayerDetail(episode: nil)
     }
 }
-

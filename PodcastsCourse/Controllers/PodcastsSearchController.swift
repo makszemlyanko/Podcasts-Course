@@ -72,7 +72,7 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     fileprivate func setupTableView() {
         tableView.tableFooterView = UIView() // remove horizontal lines (dividers)
         let nib = UINib(nibName: "PodcastCell", bundle: nil)
-        tableView.register(nib , forCellReuseIdentifier: cellId)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -90,5 +90,3 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
         return 116
     }
 }
-
-

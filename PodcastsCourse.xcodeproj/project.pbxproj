@@ -27,13 +27,13 @@
 		153D50752893C7570062FB0C /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153D50742893C7570062FB0C /* Podcast.swift */; };
 		153D50782893C75F0062FB0C /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153D50772893C75F0062FB0C /* Episode.swift */; };
 		153D507C289511280062FB0C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153D507B289511280062FB0C /* UserDefaults.swift */; };
+		153ED99328A93C950078F8CD /* Pods_PodcastsCourse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 481E83371C1A3AEE98785C4F /* Pods_PodcastsCourse.framework */; };
 		154CDD1F28926EB300DE7D2D /* PlayerDetailViewGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154CDD1E28926EB300DE7D2D /* PlayerDetailViewGestures.swift */; };
 		154CDD2328927FDE00DE7D2D /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154CDD2228927FDE00DE7D2D /* UIApplication.swift */; };
 		154CDD2628928B2200DE7D2D /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154CDD2528928B2200DE7D2D /* FavoritesController.swift */; };
 		154CDD2A28929B6100DE7D2D /* FavoritesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154CDD2928929B6100DE7D2D /* FavoritesViewCell.swift */; };
 		15830E91287C369E001D2583 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15830E90287C369D001D2583 /* APIService.swift */; };
 		15D03FBF2876CF3600558AA0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D03FBE2876CF3600558AA0 /* MainTabBarController.swift */; };
-		4313B16DA308D56253659A15 /* Pods_PodcastsCourse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 481E83371C1A3AEE98785C4F /* Pods_PodcastsCourse.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4313B16DA308D56253659A15 /* Pods_PodcastsCourse.framework in Frameworks */,
+				153ED99328A93C950078F8CD /* Pods_PodcastsCourse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,12 +103,13 @@
 		150DA2312876C98500690800 /* PodcastsCourse */ = {
 			isa = PBXGroup;
 			children = (
+				150DA2322876C98500690800 /* AppDelegate.swift */,
+				150DA2342876C98500690800 /* SceneDelegate.swift */,
 				153728A428816E0400742456 /* Extensions */,
 				15830E8F287C368D001D2583 /* API */,
 				15368514287820E20022C6F1 /* Models */,
 				150DA24F2876CC8300690800 /* Views */,
 				150DA2502876CC9E00690800 /* Controllers */,
-				150DA24D2876CC7700690800 /* Delegate */,
 				150DA23B2876C98800690800 /* Assets.xcassets */,
 				150DA2402876C98800690800 /* Info.plist */,
 				150DA2362876C98500690800 /* ViewController.swift */,
@@ -116,15 +117,6 @@
 				150DA23D2876C98800690800 /* LaunchScreen.storyboard */,
 			);
 			path = PodcastsCourse;
-			sourceTree = "<group>";
-		};
-		150DA24D2876CC7700690800 /* Delegate */ = {
-			isa = PBXGroup;
-			children = (
-				150DA2322876C98500690800 /* AppDelegate.swift */,
-				150DA2342876C98500690800 /* SceneDelegate.swift */,
-			);
-			path = Delegate;
 			sourceTree = "<group>";
 		};
 		150DA24F2876CC8300690800 /* Views */ = {

@@ -7,9 +7,10 @@
 
 import UIKit
 import AVKit
+import MediaPlayer
 
 class PlayerDetailView: UIView {
-    
+
     var episode: Episode! {
         didSet {
             episodeAuthorLabel.text = episode.author
@@ -21,7 +22,6 @@ class PlayerDetailView: UIView {
             miniEpisodeImageView.sd_setImage(with: url, completed: nil)
         }
     }
-    
     
     let player: AVPlayer = {
         let avp = AVPlayer()
@@ -70,7 +70,7 @@ class PlayerDetailView: UIView {
     @IBOutlet weak var episodeImageView: UIImageView! {
         didSet {
             episodeImageView.transform = shrunkenTransform
-            episodeImageView.contentMode = .scaleAspectFill
+            episodeImageView.contentMode = .scaleAspectFit
             episodeImageView.layer.cornerRadius = 8
         }
     }
@@ -150,7 +150,6 @@ class PlayerDetailView: UIView {
         self.episodeDurationSlider.value = Float(percentage)
     }
     
-    
     fileprivate func setupGestures() {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximize)))
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
@@ -160,6 +159,10 @@ class PlayerDetailView: UIView {
         
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        setupRemoteControls()
+        
+        setupAudioSession()
 
         setupGestures()
         observePlayerCurrentTime()
@@ -169,7 +172,44 @@ class PlayerDetailView: UIView {
         
         player.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
             print("episode started playing")
-            self?.enlargeEpisodeImageView()
+            self?.enlargeEpisodeImageView()  
+        }
+    }
+    
+    fileprivate func setupRemoteControls() {
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        
+        let commantCenter = MPRemoteCommandCenter.shared()
+        
+        commantCenter.playCommand.isEnabled = true
+        commantCenter.playCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+            self.player.play()
+            self.playPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+            self.miniPlayPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+            return .success
+        }
+        
+        commantCenter.pauseCommand.isEnabled = true
+        commantCenter.pauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+            self.player.pause()
+            self.playPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+            self.miniPlayPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+            return .commandFailed
+        }
+        
+        commantCenter.togglePlayPauseCommand.isEnabled = true
+        commantCenter.togglePlayPauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+            self.handlePlayPause()
+            return .success
+        }
+    }
+    
+    fileprivate func setupAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch let sessionError {
+            print("Failed to activate session: \(sessionError)")
         }
     }
     
@@ -209,6 +249,4 @@ class PlayerDetailView: UIView {
             self.episodeImageView.transform = .identity
         }
     }
-    
-
 }

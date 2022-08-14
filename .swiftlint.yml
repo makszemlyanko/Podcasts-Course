@@ -1,3 +1,14 @@
-disabled_rules:
+disabled_rules: 
+- identifier_name
+- line_length
+- file_length
 - trailing_whitespace
+- force_cast
+- type_body_length
+- force_try
+- type_name
+- cyclomatic_complexity
+- function_body_length
+- unused_optional_binding
+- comment_spacing
 

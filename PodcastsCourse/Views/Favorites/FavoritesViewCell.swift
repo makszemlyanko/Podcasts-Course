@@ -9,6 +9,8 @@ import UIKit
 
 class FavoritesViewCell: UICollectionViewCell {
     
+    static let cellId = "cellId"
+    
     var podcast: Podcast! {
         didSet {
             nameLabel.text = podcast.trackName

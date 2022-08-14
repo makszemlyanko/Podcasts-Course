@@ -9,19 +9,18 @@ import UIKit
 
 class FavoritesController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let cellId = "cellId"
+   // let cellId = "cellId"
     
     var podcasts = UserDefaults.standard.savedPodcasts()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupCollectionView()
     }
     
     fileprivate func setupCollectionView() {
         collectionView.backgroundColor = .white
-        collectionView.register(FavoritesViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(FavoritesViewCell.self, forCellWithReuseIdentifier: FavoritesViewCell.cellId)
     }
     
     // MARK: - UICollectionView Delegate / Spacing methods
@@ -31,7 +30,7 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FavoritesViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoritesViewCell.cellId, for: indexPath) as! FavoritesViewCell
         cell.podcast = self.podcasts[indexPath.item]
         return cell
     }

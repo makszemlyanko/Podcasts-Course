@@ -11,11 +11,11 @@ import FeedKit
 
 class APIService {
     
-    static let shared = APIService() //singleton
+    static let shared = APIService() // singleton
     
     let baseiTunesSearchURL = "https://itunes.apple.com/search"
     
-    func fetchEpisodes(feedUrl: String, comleptionHandler: @escaping ([Episode]) -> ()) {
+    func fetchEpisodes(feedUrl: String, comleptionHandler: @escaping ([Episode]) -> Void) {
         let secureFeedUrl = feedUrl.contains("https") ? feedUrl : feedUrl.replacingOccurrences(of: "http", with: "https")
         guard let url = URL(string: secureFeedUrl) else { return }
         DispatchQueue.global(qos: .background).async {
@@ -37,7 +37,7 @@ class APIService {
         }
     }
     
-    func fetchPodacasts(searchText: String, completionHandler: @escaping ([Podcast]) -> ()) {
+    func fetchPodacasts(searchText: String, completionHandler: @escaping ([Podcast]) -> Void) {
         let parameters = ["term": searchText, "media": "podcast"]
         AF.request(baseiTunesSearchURL, method: .get, parameters: parameters, encoding: URLEncoding.default).responseData { (dataResponse) in
             if let err = dataResponse.error {
