@@ -10,5 +10,4 @@ disabled_rules:
 - cyclomatic_complexity
 - function_body_length
 - unused_optional_binding
-- comment_spacing
-
+- mark

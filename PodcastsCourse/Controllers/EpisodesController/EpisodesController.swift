@@ -49,25 +49,10 @@ class EpisodesController: UITableViewController {
     // MARK: - NavigationBar Buttons
     
     fileprivate func setupNavigationBarButtons() {
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleFetchSavedPodcast)),
-            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleSaveFavorite))
-            ]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleSaveFavorite))
     }
-    
-    @objc func handleFetchSavedPodcast() {
-        print(#function)
-        guard let data = UserDefaults.standard.data(forKey: UserDefaults.favoritePodcastKey) else { return }
-        do {
-            let savedPodcasts = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Podcast]
-            savedPodcasts?.forEach({ (p) in
-                print(p.trackName ?? "", p.artworkUrl600 ?? "image", p.artistName ?? "NAME")
-            })
-        } catch let error {
-            print(error)
-        }
-    }
-    
+
+    // saving data into UserDefaults
     @objc func handleSaveFavorite() {
         print(#function)
         guard let podcast = self.podcast else { return }

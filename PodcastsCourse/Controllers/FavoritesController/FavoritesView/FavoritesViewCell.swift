@@ -9,7 +9,17 @@ import UIKit
 
 class FavoritesViewCell: UICollectionViewCell {
     
-    var imageView = UIImageView(image: #imageLiteral(resourceName: "appicon"))
+    var podcast: Podcast! {
+        didSet {
+            nameLabel.text = podcast.trackName
+            authorLabel.text = podcast.artistName
+            
+            let url = URL(string: podcast.artworkUrl600 ?? "")
+            imageView.sd_setImage(with: url)
+        }
+    }
+    
+    var imageView = UIImageView()
     let nameLabel = UILabel()
     let authorLabel = UILabel()
     
@@ -25,10 +35,10 @@ class FavoritesViewCell: UICollectionViewCell {
     
     fileprivate func stylingViewCell() {
         imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 10
-        nameLabel.text = "Podcast name"
+        imageView.layer.cornerRadius = 8
+//        nameLabel.text = "Podcast name"
         nameLabel.font = .systemFont(ofSize: 16, weight: .semibold)
-        authorLabel.text = "Author name"
+//        authorLabel.text = "Author name"
         authorLabel.font = .systemFont(ofSize: 14)
         authorLabel.textColor = .lightGray
     }
