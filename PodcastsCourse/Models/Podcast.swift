@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Podcast: NSObject, NSCoding, NSSecureCoding, Decodable {
+class Podcast: NSObject, NSCoding, NSSecureCoding, Codable {
     
     static var supportsSecureCoding: Bool = true
     
