@@ -10,6 +10,7 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
         super.viewDidLoad()
         
         setupCollectionView()
+        navigationController?.navigationBar.tintColor = .systemPurple
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -18,7 +19,7 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
         collectionView?.reloadData()
         UIApplication.mainTabBarController()?.viewControllers?[1].tabBarItem.badgeValue = nil
     }
-    
+        
     fileprivate func setupCollectionView() {
         collectionView?.backgroundColor = .white
         collectionView?.register(FavoritesViewCell.self, forCellWithReuseIdentifier: cellId)
@@ -45,6 +46,12 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     // MARK:- UICollectionView Delegate / Spacing Methods
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let episodesController = EpisodesController()
+        episodesController.podcast = self.podcasts[indexPath.item]
+        navigationController?.pushViewController(episodesController, animated: true)
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.podcasts.count

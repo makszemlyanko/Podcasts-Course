@@ -49,9 +49,18 @@ class EpisodesController: UITableViewController {
     // MARK: - NavigationBar Buttons
     
     fileprivate func setupNavigationBarButtons() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleSaveFavorite))
+        
+        // checking saved podcast or not
+        let savedPodcasts = UserDefaults.standard.savedPodcasts()
+        let hasFavorite = savedPodcasts.firstIndex(where: {$0.trackName == self.podcast?.trackName && $0.artistName == self.podcast?.artistName}) != nil
+        if hasFavorite {
+            // setup heart icon
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "heart"), style: .plain, target: nil, action: nil)
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleSaveFavorite))
+        }
     }
-
+    
     // saving data into UserDefaults
     @objc func handleSaveFavorite() {
         print(#function)
@@ -62,8 +71,15 @@ class EpisodesController: UITableViewController {
             let data = try NSKeyedArchiver.archivedData(withRootObject: listOfPodcasts, requiringSecureCoding: true)
             UserDefaults.standard.setValue(data, forKey: UserDefaults.favoritePodcastKey)
         } catch let error {
-            print(error)
+            print(error.localizedDescription)
         }
+        
+        showBadgeHightlight() // tabBar badge
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "heart"), style: .plain, target: nil, action: nil)
+    }
+    
+    fileprivate func showBadgeHightlight() {
+        UIApplication.mainTabBarController()?.viewControllers?[1].tabBarItem.badgeValue = "New"
     }
     
     // MARK: - UITableView
@@ -99,5 +115,4 @@ class EpisodesController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 116
     }
-    
 }
