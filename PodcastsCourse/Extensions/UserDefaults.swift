@@ -45,7 +45,6 @@ extension UserDefaults {
         do {
             let data = try JSONEncoder().encode(filteredEpisodes)
             UserDefaults.standard.set(data, forKey: UserDefaults.downloadedEpisodeKey)
-            
         } catch let error {
             print(error.localizedDescription)
         }

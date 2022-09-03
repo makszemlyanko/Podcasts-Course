@@ -193,8 +193,11 @@ class PlayerDetailView: UIView {
         
         player.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
             print("episode started playing")
-            self?.enlargeEpisodeImageView()  
+            self?.enlargeEpisodeImageView()
+            self?.playPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+            self?.miniPlayPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
         }
+        
     }
     
     // MARK: - Background Audio Mode

@@ -35,13 +35,11 @@ class DownloadsController: UITableViewController {
     
     // MARK: - UITableView
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let detailPlayer = PlayerDetailView()
-//        detailPlayer.episode = self.episodes[indexPath.row]
-////        let mainTabBarController = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? MainTabBarController
-////        mainTabBarController?.maximizePlayerDetail(episode: detailPlayer.episode)
-//
-//    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let episode = self.episodes[indexPath.row]
+        let mainTabBarController = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? MainTabBarController
+        mainTabBarController?.maximizePlayerDetail(episode: episode)
+    }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {

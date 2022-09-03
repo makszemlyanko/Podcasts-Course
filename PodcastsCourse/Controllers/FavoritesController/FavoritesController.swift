@@ -33,7 +33,7 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
         guard let selectedIndexPath = collectionView.indexPathForItem(at: location) else { return }
         
         let alertController = UIAlertController(title: "Remove the podcast?", message: nil, preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (_) in
+        alertController.addAction(UIAlertAction(title: "Remove", style: .destructive, handler: { (_) in
             let selectedPodcast = self.podcasts[selectedIndexPath.item]
             
             self.podcasts.remove(at: selectedIndexPath.item)
