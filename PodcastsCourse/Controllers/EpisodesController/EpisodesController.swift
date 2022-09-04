@@ -85,11 +85,13 @@ class EpisodesController: UITableViewController {
     // MARK: - UITableView
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let downloadAction = UIContextualAction(style: .normal, title: "Download") { (_, _, complition)  in
+        let downloadAction = UIContextualAction(style: .normal, title: "Download") { (_, _, completion)  in
             let episode = self.episodes[indexPath.row]
             UserDefaults.standard.downloadEpisode(episode: episode)
-            print("Downloaded")
-            complition(true)
+            completion(true)
+            
+            // Download the episode with Alamofire
+            APIService.shared.downloadEpisode(episode: episode)
         }
         downloadAction.backgroundColor = .systemPurple
         let swipeActions = UISwipeActionsConfiguration(actions: [downloadAction])

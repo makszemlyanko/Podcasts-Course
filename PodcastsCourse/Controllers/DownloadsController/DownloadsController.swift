@@ -37,8 +37,7 @@ class DownloadsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let episode = self.episodes[indexPath.row]
-        let mainTabBarController = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController as? MainTabBarController
-        mainTabBarController?.maximizePlayerDetail(episode: episode)
+        UIApplication.mainTabBarController()?.maximizePlayerDetail(episode: episode)
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

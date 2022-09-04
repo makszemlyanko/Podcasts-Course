@@ -15,6 +15,30 @@ class APIService {
     
     let baseiTunesSearchURL = "https://itunes.apple.com/search"
     
+    func downloadEpisode(episode: Episode) {
+        
+        let downloadRequest = DownloadRequest.suggestedDownloadDestination()
+        
+        AF.download(episode.streamUrl, to: downloadRequest).response { (response) in
+            print(response.description)
+            
+            // Update UserDefaults to get access to my episode from directory with dowloaded episodes
+            var downloadedEpisodes = UserDefaults.standard.downloadedEpisodes()
+            guard let index = downloadedEpisodes.firstIndex(where: { $0.title == episode.title && $0.author == episode.author }) else { return }
+            downloadedEpisodes[index].fileUrl = response.fileURL?.absoluteString ?? ""
+            
+            
+            do {
+                let data = try JSONEncoder().encode(downloadedEpisodes)
+                UserDefaults.standard.set(data, forKey: UserDefaults.downloadedEpisodeKey)
+            } catch let error {
+                print("Failed to encode downloaded episodes with file url update:", error)
+            }
+            
+            
+        }
+    }
+    
     func fetchEpisodes(feedUrl: String, comleptionHandler: @escaping ([Episode]) -> Void) {
         let secureFeedUrl = feedUrl.contains("https") ? feedUrl : feedUrl.replacingOccurrences(of: "http", with: "https")
         guard let url = URL(string: secureFeedUrl) else { return }
