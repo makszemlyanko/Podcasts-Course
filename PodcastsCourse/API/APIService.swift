@@ -22,11 +22,10 @@ class APIService {
         AF.download(episode.streamUrl, to: downloadRequest).response { (response) in
             print(response.description)
             
-            // Update UserDefaults to get access to my episode from directory with dowloaded episodes
+            // Update UserDefaults to get access to my episode from directory with downloaded episodes
             var downloadedEpisodes = UserDefaults.standard.downloadedEpisodes()
             guard let index = downloadedEpisodes.firstIndex(where: { $0.title == episode.title && $0.author == episode.author }) else { return }
             downloadedEpisodes[index].fileUrl = response.fileURL?.absoluteString ?? ""
-            
             
             do {
                 let data = try JSONEncoder().encode(downloadedEpisodes)
@@ -34,8 +33,6 @@ class APIService {
             } catch let error {
                 print("Failed to encode downloaded episodes with file url update:", error)
             }
-            
-            
         }
     }
     
