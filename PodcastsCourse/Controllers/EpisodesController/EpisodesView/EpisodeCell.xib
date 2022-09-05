@@ -45,8 +45,18 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Q8-9h-2SL">
+                        <rect key="frame" x="33" y="56" width="66" height="30"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="shadowColor" systemColor="systemPurpleColor"/>
+                        <size key="shadowOffset" width="0.0" height="1"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="3Q8-9h-2SL" firstAttribute="centerY" secondItem="S5w-La-I1k" secondAttribute="centerY" id="5Co-YS-gda"/>
+                    <constraint firstItem="3Q8-9h-2SL" firstAttribute="centerX" secondItem="S5w-La-I1k" secondAttribute="centerX" id="RuF-Dp-udV"/>
                     <constraint firstItem="SHY-GU-trm" firstAttribute="centerY" secondItem="6iu-on-Tcc" secondAttribute="centerY" id="WaT-PL-WYd"/>
                     <constraint firstItem="SHY-GU-trm" firstAttribute="leading" secondItem="S5w-La-I1k" secondAttribute="trailing" constant="12" id="ZKh-8z-yKh"/>
                     <constraint firstAttribute="trailing" secondItem="SHY-GU-trm" secondAttribute="trailing" constant="16" id="jXk-WL-6gA"/>
@@ -57,6 +67,7 @@
             <connections>
                 <outlet property="descriptionLabel" destination="KWx-Vo-3sg" id="qaL-37-GWw"/>
                 <outlet property="episodeImageView" destination="S5w-La-I1k" id="dML-VA-hMH"/>
+                <outlet property="progressLabel" destination="3Q8-9h-2SL" id="1f1-PO-80s"/>
                 <outlet property="pubDateLabel" destination="ysf-wC-dXu" id="rsR-k5-Q35"/>
                 <outlet property="titleLabel" destination="OYi-yY-jRC" id="P6V-Ex-LHA"/>
             </connections>

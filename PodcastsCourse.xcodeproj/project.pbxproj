@@ -257,8 +257,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 150DA2432876C98800690800 /* Build configuration list for PBXNativeTarget "PodcastsCourse" */;
 			buildPhases = (
-				1560AD0628953A4B0003F0C0 /* ShellScript */,
 				58A214FD6F3160B7F9DDE38A /* [CP] Check Pods Manifest.lock */,
+				1560AD0628953A4B0003F0C0 /* ShellScript */,
 				150DA22B2876C98500690800 /* Sources */,
 				150DA22C2876C98500690800 /* Frameworks */,
 				150DA22D2876C98500690800 /* Resources */,
