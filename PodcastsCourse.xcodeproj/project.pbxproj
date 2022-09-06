@@ -13,6 +13,7 @@
 		150DA23A2876C98500690800 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 150DA2382876C98500690800 /* Main.storyboard */; };
 		150DA23C2876C98800690800 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 150DA23B2876C98800690800 /* Assets.xcassets */; };
 		150DA23F2876C98800690800 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 150DA23D2876C98800690800 /* LaunchScreen.storyboard */; };
+		152F186D28C7682C00EE49D8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 152F186C28C7682C00EE49D8 /* .gitignore */; };
 		1531FA682885C0CB00488F24 /* PlayerDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1531FA672885C0CB00488F24 /* PlayerDetailView.xib */; };
 		1531FA6B2886EDFF00488F24 /* CMTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1531FA6A2886EDFD00488F24 /* CMTime.swift */; };
 		1536851228781FE90022C6F1 /* PodcastsSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1536851128781FE90022C6F1 /* PodcastsSearchController.swift */; };
@@ -46,6 +47,7 @@
 		150DA23B2876C98800690800 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		150DA23E2876C98800690800 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		150DA2402876C98800690800 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		152F186C28C7682C00EE49D8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1531FA672885C0CB00488F24 /* PlayerDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailView.xib; sourceTree = "<group>"; };
 		1531FA6A2886EDFD00488F24 /* CMTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMTime.swift; sourceTree = "<group>"; };
 		1536851128781FE90022C6F1 /* PodcastsSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsSearchController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				150DA2502876CC9E00690800 /* Controllers */,
 				150DA23B2876C98800690800 /* Assets.xcassets */,
 				150DA2402876C98800690800 /* Info.plist */,
+				152F186C28C7682C00EE49D8 /* .gitignore */,
 				150DA2362876C98500690800 /* ViewController.swift */,
 				150DA2382876C98500690800 /* Main.storyboard */,
 				150DA23D2876C98800690800 /* LaunchScreen.storyboard */,
@@ -311,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1531FA682885C0CB00488F24 /* PlayerDetailView.xib in Resources */,
+				152F186D28C7682C00EE49D8 /* .gitignore in Resources */,
 				150DA23F2876C98800690800 /* LaunchScreen.storyboard in Resources */,
 				150DA23C2876C98800690800 /* Assets.xcassets in Resources */,
 				153728A228815E9700742456 /* EpisodeCell.xib in Resources */,
