@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/swift,xcode,macos
-# Edit at https://www.toptal.com/developers/gitignore?templates=swift,xcode,macos
+# Created by https://www.toptal.com/developers/gitignore/api/swift,macos,xcode
+# Edit at https://www.toptal.com/developers/gitignore?templates=swift,macos,xcode
 
 ### macOS ###
 # General
@@ -130,4 +130,4 @@ iOSInjectionProject/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# End of https://www.toptal.com/developers/gitignore/api/swift,xcode,macos
+# End of https://www.toptal.com/developers/gitignore/api/swift,macos,xcode
