@@ -16,9 +16,8 @@ class PlayerDetailView: UIView {
             episodeAuthorLabel.text = episode.author
             episodeTitleLabel.text = episode.title
             miniEpisodeTitleLabel.text = episode.title
-            setupNowPlayingInfo()
             playEpisode()
-            guard let url = URL(string: episode.imageUrl?.toSecureHTTPS() ?? "") else { return } // episode image
+            guard let url = URL(string: episode.imageUrl?.toSecureHTTPS() ?? "") else { return }
             episodeImageView.sd_setImage(with: url, completed: nil)
             miniEpisodeImageView.sd_setImage(with: url, completed: nil)
             miniEpisodeImageView.sd_setImage(with: url) { (image, _, _, _) in
@@ -32,27 +31,27 @@ class PlayerDetailView: UIView {
             }
         }
     }
-    
+
     let player: AVPlayer = {
         let avp = AVPlayer()
         avp.automaticallyWaitsToMinimizeStalling = false
         return avp
     }()
-    
+
     var panGesture: UIPanGestureRecognizer!
-    
+
     fileprivate let shrunkenTransform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-    
+
     static func initFromNib() -> PlayerDetailView {
         return Bundle.main.loadNibNamed("PlayerDetailView", owner: self, options: nil)?.first as! PlayerDetailView
     }
-    
+
     deinit {
         print("PlayerDetailView memory being reclaimed...")
     }
 
     // MARK: - IB Outlets
-    
+
     // Mini episode player view
     @IBOutlet weak var miniEpisodeImageView: UIImageView! {
         didSet {
@@ -72,10 +71,10 @@ class PlayerDetailView: UIView {
             miniFastForwardButton.addTarget(self, action: #selector(handleFastForward(_:)), for: .touchUpInside)
         }
     }
-    
+
     @IBOutlet weak var miniPlayerView: UIView!
     @IBOutlet weak var maximizedStackView: UIStackView!
-    
+
     // Maxi episode player view
     @IBOutlet weak var episodeImageView: UIImageView! {
         didSet {
@@ -84,10 +83,10 @@ class PlayerDetailView: UIView {
             episodeImageView.layer.cornerRadius = 8
         }
     }
-    
+
     @IBOutlet weak var episodeTitleLabel: UILabel!
     @IBOutlet weak var episodeAuthorLabel: UILabel!
-    
+
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var episodeDurationSlider: UISlider! {
@@ -95,22 +94,22 @@ class PlayerDetailView: UIView {
             episodeDurationSlider.tintColor = .systemPurple
         }
     }
-    
+
     @IBOutlet weak var playPauseButton: UIButton! {
         didSet {
             playPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
             playPauseButton.addTarget(self, action: #selector(handlePlayPause), for: .touchUpInside)
         }
     }
-    
+
     @IBOutlet weak var episodeVolume: UISlider! {
         didSet {
             episodeVolume.tintColor = .lightGray
         }
     }
-    
+
     // MARK: - IB Actions
-    
+
     @IBAction func handleCurrentTimeSlider(_ sender: Any) {
         let percentage = episodeDurationSlider.value
         guard let duration = player.currentItem?.duration else { return }
@@ -119,117 +118,73 @@ class PlayerDetailView: UIView {
         let seekTime = CMTimeMakeWithSeconds(seekTimeInSeconds, preferredTimescale: 1)
         player.seek(to: seekTime)
     }
-    
+
     @IBAction func handleRewind(_ sender: Any) {
         seekToCurrentTime(delta: -15)
     }
-    
+
     @IBAction func handleFastForward(_ sender: Any) {
         seekToCurrentTime(delta: 15)
     }
-    
+
     @IBAction func handleVolume(_ sender: UISlider) {
         player.volume = episodeVolume.value
     }
-    
+
     @IBAction func handleDismiss(_ sender: Any) {
         UIApplication.mainTabBarController()?.minimizePlayerDetail()
     }
-    
-    // MARK: - Another methods
+
     fileprivate func seekToCurrentTime(delta: Int64) {
         let fifteenSeconds = CMTimeMake(value: delta, timescale: 1)
         let seekTime = CMTimeAdd(player.currentTime(), fifteenSeconds)
         player.seek(to: seekTime)
     }
-    
+
     fileprivate func observePlayerCurrentTime() {
         let interval = CMTimeMake(value: 1, timescale: 2)
         player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] (time) in
             self?.currentTimeLabel.text = time.toDisplayString()
             let durationtime = self?.player.currentItem?.duration
             self?.durationLabel.text = durationtime?.toDisplayString()
-            self?.setupLockscreenCurrentTime()
             self?.updateCurrentTimeSlider()
         }
     }
-    
-    fileprivate func setupLockscreenCurrentTime() {
-        var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo
-        guard let currentItem = player.currentItem else { return }
-        let durationInSeconds = CMTimeGetSeconds(currentItem.duration)
-        let elapseTime = CMTimeGetSeconds(player.currentTime())
-        nowPlayingInfo?[MPNowPlayingInfoPropertyElapsedPlaybackTime] = elapseTime
-        nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = durationInSeconds
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-    }
-    
+
     fileprivate func updateCurrentTimeSlider() {
         let currentTimeSeconds = CMTimeGetSeconds(player.currentTime())
         let durationSeconds = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(value: 1, timescale: 1 ))
         let percentage = currentTimeSeconds / durationSeconds
         self.episodeDurationSlider.value = Float(percentage)
     }
-    
+
     fileprivate func setupGestures() {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximize)))
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         miniPlayerView.addGestureRecognizer(panGesture)
         maximizedStackView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleDismissPan)))
     }
-        
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        setupRemoteControls()
-        
+
         setupAudioSession()
 
         setupGestures()
         observePlayerCurrentTime()
-        
+
         let time = CMTimeMake(value: 1, timescale: 3)
         let times = [NSValue(time: time)]
-        
+
         player.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
             print("episode started playing")
             self?.enlargeEpisodeImageView()
             self?.playPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
             self?.miniPlayPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
         }
-        
+
     }
-    
-    // MARK: - Background Audio Mode
-    
-    fileprivate func setupRemoteControls() {
-        UIApplication.shared.beginReceivingRemoteControlEvents()
-        
-        let commantCenter = MPRemoteCommandCenter.shared()
-        
-        commantCenter.playCommand.isEnabled = true
-        commantCenter.playCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
-            self.player.play()
-            self.playPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
-            self.miniPlayPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
-            return .success
-        }
-        
-        commantCenter.pauseCommand.isEnabled = true
-        commantCenter.pauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
-            self.player.pause()
-            self.playPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
-            self.miniPlayPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
-            return .commandFailed
-        }
-        
-        commantCenter.togglePlayPauseCommand.isEnabled = true
-        commantCenter.togglePlayPauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
-            self.handlePlayPause()
-            return .success
-        }
-    }
-    
+
     fileprivate func setupAudioSession() {
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
@@ -238,16 +193,7 @@ class PlayerDetailView: UIView {
             print("Failed to activate session: \(sessionError)")
         }
     }
-    
-    // MARK: - Playing Mode On The Lockscreen
-    
-    fileprivate func setupNowPlayingInfo() {
-        var nowPlaingInfo = [String: Any]()
-        nowPlaingInfo[MPMediaItemPropertyTitle] = episode.title
-        nowPlaingInfo[MPMediaItemPropertyArtist] = episode.author
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlaingInfo
-    }
-    
+
     @objc fileprivate func handlePlayPause() {
         print("play and pause button")
         if player.timeControlStatus == .paused {
@@ -262,7 +208,7 @@ class PlayerDetailView: UIView {
             shrinkEpisodeImageView()
         }
     }
-    
+
     fileprivate func playEpisode() {
         if episode.fileUrl != nil {
             playEpisodeUsingFileUrl()
@@ -274,24 +220,24 @@ class PlayerDetailView: UIView {
             player.play()
         }
     }
-    
+
     fileprivate func playEpisodeUsingFileUrl() {
         print("trying to play episode from file Url:", episode.fileUrl ?? "")
-        
+
         // figure out the file name for our episode file url
         guard let fileURL = URL(string: episode.fileUrl ?? "") else { return }
         let fileName = fileURL.lastPathComponent
-        
+
         guard var trueLocation = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         trueLocation.appendPathComponent(fileName)
-        
+
         let playerItem = AVPlayerItem(url: trueLocation)
         player.replaceCurrentItem(with: playerItem)
         player.play()
     }
-    
+
     // MARK: - Episode image animating
-    
+
     fileprivate func shrinkEpisodeImageView() {
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseOut) {
             self.episodeImageView.transform = self.shrunkenTransform
