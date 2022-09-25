@@ -13,23 +13,16 @@ class MainTabBarController: UITabBarController {
     var minimizedTopAnchorConstraint: NSLayoutConstraint!
     var bottomAnchorConstraint: NSLayoutConstraint!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tabBar.tintColor = .systemPurple
-        
-        setupViewControllers()
-        
-        setupPlayerDetailView()
-        
-    }
-    
-    // MARK: - Setup Functions
-    
     let playerDetailView = PlayerDetailView.initFromNib()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tabBar.tintColor = .systemPurple
+        setupViewControllers()
+        setupPlayerDetailView()
+    }
+    
     @objc func minimizePlayerDetail() {
-        print("minimize")
         maximizedTopAnchorConstraint.isActive = false
         bottomAnchorConstraint.constant = view.frame.height
         minimizedTopAnchorConstraint.isActive = true
@@ -43,7 +36,6 @@ class MainTabBarController: UITabBarController {
     }
     
     func maximizePlayerDetail(episode: Episode?) {
-        print("maximize")
         self.playerDetailView.miniPlayerView.alpha = 0
         minimizedTopAnchorConstraint.isActive = false
         maximizedTopAnchorConstraint.isActive = true
@@ -59,28 +51,19 @@ class MainTabBarController: UITabBarController {
         }
     }
     
-    fileprivate func setupPlayerDetailView() {
-        
-        // Use Auto Layout
+    private func setupPlayerDetailView() {
         view.insertSubview(playerDetailView, belowSubview: tabBar)
-        
-        // Enable Auto Layout
         playerDetailView.translatesAutoresizingMaskIntoConstraints = false
-        
         maximizedTopAnchorConstraint = playerDetailView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height)
         maximizedTopAnchorConstraint.isActive = true
-        
         bottomAnchorConstraint = playerDetailView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.frame.height)
         bottomAnchorConstraint.isActive = true
-        
         minimizedTopAnchorConstraint = playerDetailView.topAnchor.constraint(equalTo: tabBar.topAnchor, constant: -64)
-        
         playerDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        
         playerDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
-    fileprivate func setupViewControllers() {
+    private func setupViewControllers() {
         let layout = UICollectionViewFlowLayout()
         let favoritesController = FavoritesController(collectionViewLayout: layout)
         viewControllers = [
@@ -90,7 +73,7 @@ class MainTabBarController: UITabBarController {
         ]
     }
     
-    fileprivate func createNavContoller(for rootViewController: UIViewController, title: String, image: UIImage) -> UIViewController {
+    private func createNavContoller(for rootViewController: UIViewController, title: String, image: UIImage) -> UIViewController {
         let navController = UINavigationController(rootViewController: rootViewController)
         navController.navigationBar.prefersLargeTitles = true
         rootViewController.navigationItem.title = title

@@ -9,9 +9,9 @@ import UIKit
 
 class DownloadsController: UITableViewController {
     
-    fileprivate let cellId = "cellId"
+    private let cellId = "cellId"
     
-    fileprivate var episodes = UserDefaults.standard.downloadedEpisodes()
+    private var episodes = UserDefaults.standard.downloadedEpisodes()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,15 +25,14 @@ class DownloadsController: UITableViewController {
         tableView.reloadData()
     }
     
-    fileprivate func setupObservers() {
+    private func setupObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleDownloadProgress), name: .downloadProgress, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleDownloadComplete), name: .downloadComplete, object: nil)
     }
     
-    @objc fileprivate func handleDownloadProgress(notification: Notification) {
+    @objc private func handleDownloadProgress(notification: Notification) {
         guard let userInfo = notification.userInfo as? [String: Any] else { return }
-        
         guard let progress = userInfo["progress"] as? Double else { return }
         guard let title = userInfo["title"] as? String else { return }
         
@@ -51,7 +50,7 @@ class DownloadsController: UITableViewController {
         }
     }
     
-    @objc fileprivate func handleDownloadComplete(notification: Notification) {
+    @objc private func handleDownloadComplete(notification: Notification) {
         guard let episodeDownloadComplete = notification.object as? APIService.EpisodeDownloadCompleteTuple else { return }
         
         guard let index = self.episodes.firstIndex(where: { $0.title == episodeDownloadComplete.episodeTitle }) else { return }
@@ -59,9 +58,7 @@ class DownloadsController: UITableViewController {
         self.episodes[index].fileUrl = episodeDownloadComplete.fileUrl
     }
     
-    // MARK: - Setup TableView
-    
-    fileprivate func setupTableView() {
+    private func setupTableView() {
         let nib = UINib(nibName: "EpisodeCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
         tableView.tableFooterView = UIView()

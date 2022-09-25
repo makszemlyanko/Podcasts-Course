@@ -2,15 +2,13 @@ import UIKit
 
 class FavoritesController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    fileprivate let cellId = "cellId"
+    private let cellId = "cellId"
     
     var podcasts = UserDefaults.standard.savedPodcasts()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupCollectionView()
-        navigationController?.navigationBar.tintColor = .systemPurple
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -20,7 +18,7 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
         UIApplication.mainTabBarController()?.viewControllers?[1].tabBarItem.badgeValue = nil
     }
         
-    fileprivate func setupCollectionView() {
+    private func setupCollectionView() {
         collectionView?.backgroundColor = .white
         collectionView?.register(FavoritesViewCell.self, forCellWithReuseIdentifier: cellId)
         
@@ -28,7 +26,7 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
         collectionView.addGestureRecognizer(gesture)
     }
     
-    @objc fileprivate func handleLongPress(gesture: UILongPressGestureRecognizer) {
+    @objc private func handleLongPress(gesture: UILongPressGestureRecognizer) {
         let location = gesture.location(in: collectionView)
         guard let selectedIndexPath = collectionView.indexPathForItem(at: location) else { return }
         

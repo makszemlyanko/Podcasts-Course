@@ -10,7 +10,7 @@ import FeedKit
 
 class EpisodesController: UITableViewController {
     
-    fileprivate let cellId = "cellId"
+    private let cellId = "cellId"
     
     var episodes = [Episode]()
     
@@ -21,7 +21,7 @@ class EpisodesController: UITableViewController {
         }
     }
     
-    fileprivate func fetchEpisodes() {
+    private func fetchEpisodes() {
         print("looking for episodes", podcast?.feedUrl ?? "")
         guard let feedUrl = podcast?.feedUrl else { return }
         APIService.shared.fetchEpisodes(feedUrl: feedUrl) { (episodes) in
@@ -38,9 +38,7 @@ class EpisodesController: UITableViewController {
         setupNavigationBarButtons()
     }
     
-    // MARK: - Setup table view
-    
-    fileprivate func setupTableView() {
+    private func setupTableView() {
         let nib = UINib(nibName: "EpisodeCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
         tableView.tableFooterView = UIView() // remove horizontal lines
@@ -48,7 +46,7 @@ class EpisodesController: UITableViewController {
     
     // MARK: - NavigationBar Buttons
     
-    fileprivate func setupNavigationBarButtons() {
+    private func setupNavigationBarButtons() {
         
         // checking saved podcast or not
         let savedPodcasts = UserDefaults.standard.savedPodcasts()
@@ -78,7 +76,7 @@ class EpisodesController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "heart"), style: .plain, target: nil, action: nil)
     }
     
-    fileprivate func showBadgeHightlight() {
+    private func showBadgeHightlight() {
         UIApplication.mainTabBarController()?.viewControllers?[1].tabBarItem.badgeValue = "New"
     }
     

@@ -33,26 +33,21 @@ class FavoritesViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    fileprivate func stylingViewCell() {
+    private func stylingViewCell() {
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 8
-//        nameLabel.text = "Podcast name"
         nameLabel.font = .systemFont(ofSize: 16, weight: .semibold)
-//        authorLabel.text = "Author name"
         authorLabel.font = .systemFont(ofSize: 14)
         authorLabel.textColor = .lightGray
     }
     
-    fileprivate func setupViews() {
+    private func setupViews() {
         imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
 
         let stackView = UIStackView(arrangedSubviews: [imageView, nameLabel, authorLabel])
         stackView.axis = .vertical
-        
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
         addSubview(stackView)
-        
         stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         stackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true

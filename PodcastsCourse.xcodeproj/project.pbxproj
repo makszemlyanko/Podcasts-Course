@@ -13,7 +13,6 @@
 		150DA23A2876C98500690800 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 150DA2382876C98500690800 /* Main.storyboard */; };
 		150DA23C2876C98800690800 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 150DA23B2876C98800690800 /* Assets.xcassets */; };
 		150DA23F2876C98800690800 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 150DA23D2876C98800690800 /* LaunchScreen.storyboard */; };
-		152F186D28C7682C00EE49D8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 152F186C28C7682C00EE49D8 /* .gitignore */; };
 		1531FA682885C0CB00488F24 /* PlayerDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1531FA672885C0CB00488F24 /* PlayerDetailView.xib */; };
 		1531FA6B2886EDFF00488F24 /* CMTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1531FA6A2886EDFD00488F24 /* CMTime.swift */; };
 		1536851228781FE90022C6F1 /* PodcastsSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1536851128781FE90022C6F1 /* PodcastsSearchController.swift */; };
@@ -47,7 +46,6 @@
 		150DA23B2876C98800690800 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		150DA23E2876C98800690800 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		150DA2402876C98800690800 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		152F186C28C7682C00EE49D8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1531FA672885C0CB00488F24 /* PlayerDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailView.xib; sourceTree = "<group>"; };
 		1531FA6A2886EDFD00488F24 /* CMTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMTime.swift; sourceTree = "<group>"; };
 		1536851128781FE90022C6F1 /* PodcastsSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsSearchController.swift; sourceTree = "<group>"; };
@@ -107,18 +105,13 @@
 		150DA2312876C98500690800 /* PodcastsCourse */ = {
 			isa = PBXGroup;
 			children = (
-				150DA2322876C98500690800 /* AppDelegate.swift */,
-				150DA2342876C98500690800 /* SceneDelegate.swift */,
-				153728A428816E0400742456 /* Extensions */,
-				15830E8F287C368D001D2583 /* API */,
-				15368514287820E20022C6F1 /* Models */,
-				150DA2502876CC9E00690800 /* Controllers */,
-				150DA23B2876C98800690800 /* Assets.xcassets */,
 				150DA2402876C98800690800 /* Info.plist */,
-				152F186C28C7682C00EE49D8 /* .gitignore */,
-				150DA2362876C98500690800 /* ViewController.swift */,
-				150DA2382876C98500690800 /* Main.storyboard */,
-				150DA23D2876C98800690800 /* LaunchScreen.storyboard */,
+				15DEC29828E0686600D9994E /* Supporting files */,
+				153728A428816E0400742456 /* Extensions */,
+				15830E8F287C368D001D2583 /* Service */,
+				15368514287820E20022C6F1 /* Models */,
+				15DEC29B28E06DEC00D9994E /* View */,
+				150DA2502876CC9E00690800 /* Controllers */,
 			);
 			path = PodcastsCourse;
 			sourceTree = "<group>";
@@ -127,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				15D03FBE2876CF3600558AA0 /* MainTabBarController.swift */,
-				153728AC2883E7E500742456 /* PlayerDetailView */,
 				15984E4D28C0D2A800D2949F /* SearchController */,
 				15984E4E28C0D2E900D2949F /* EpisodesController */,
 				15984E5128C0D31100D2949F /* FavoritesController */,
@@ -193,18 +185,17 @@
 			path = FavoritesView;
 			sourceTree = "<group>";
 		};
-		15830E8F287C368D001D2583 /* API */ = {
+		15830E8F287C368D001D2583 /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				15830E90287C369D001D2583 /* APIService.swift */,
 			);
-			path = API;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		15984E4D28C0D2A800D2949F /* SearchController */ = {
 			isa = PBXGroup;
 			children = (
-				1537288028814C3F00742456 /* PodcastsView */,
 				1536851128781FE90022C6F1 /* PodcastsSearchController.swift */,
 			);
 			path = SearchController;
@@ -213,7 +204,6 @@
 		15984E4E28C0D2E900D2949F /* EpisodesController */ = {
 			isa = PBXGroup;
 			children = (
-				1537289028814CD500742456 /* EpisodesView */,
 				15372878287FFB2900742456 /* EpisodesController.swift */,
 			);
 			path = EpisodesController;
@@ -222,7 +212,6 @@
 		15984E5128C0D31100D2949F /* FavoritesController */ = {
 			isa = PBXGroup;
 			children = (
-				154CDD2828929B5200DE7D2D /* FavoritesView */,
 				154CDD2528928B2200DE7D2D /* FavoritesController.swift */,
 			);
 			path = FavoritesController;
@@ -234,6 +223,30 @@
 				15984E5928C1E8E200D2949F /* DownloadsController.swift */,
 			);
 			path = DownloadsController;
+			sourceTree = "<group>";
+		};
+		15DEC29828E0686600D9994E /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				150DA23B2876C98800690800 /* Assets.xcassets */,
+				150DA2362876C98500690800 /* ViewController.swift */,
+				150DA2322876C98500690800 /* AppDelegate.swift */,
+				150DA2342876C98500690800 /* SceneDelegate.swift */,
+				150DA2382876C98500690800 /* Main.storyboard */,
+				150DA23D2876C98800690800 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		15DEC29B28E06DEC00D9994E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				153728AC2883E7E500742456 /* PlayerDetailView */,
+				1537288028814C3F00742456 /* PodcastsView */,
+				1537289028814CD500742456 /* EpisodesView */,
+				154CDD2828929B5200DE7D2D /* FavoritesView */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		3BA03D9EC822A9ACEC5240C2 /* Pods */ = {
@@ -314,7 +327,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1531FA682885C0CB00488F24 /* PlayerDetailView.xib in Resources */,
-				152F186D28C7682C00EE49D8 /* .gitignore in Resources */,
 				150DA23F2876C98800690800 /* LaunchScreen.storyboard in Resources */,
 				150DA23C2876C98800690800 /* Assets.xcassets in Resources */,
 				153728A228815E9700742456 /* EpisodeCell.xib in Resources */,

@@ -14,12 +14,12 @@ class EpisodeCell: UITableViewCell {
             pubDateLabel.text = episode.pubDate.description
             titleLabel.text = episode.title
             descriptionLabel.text = episode.description
-            let dateFormatter = DateFormatter() // date sittings
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM, dd, yyyy"
             pubDateLabel.text = dateFormatter.string(from: episode.pubDate)
             episodeImageView.contentMode = .scaleAspectFit
             episodeImageView.layer.cornerRadius = 8
-            guard let url = URL(string: episode.imageUrl?.toSecureHTTPS() ?? "") else { return } // episode image
+            guard let url = URL(string: episode.imageUrl?.toSecureHTTPS() ?? "") else { return }
             episodeImageView.sd_setImage(with: url, completed: nil)
         }
     }

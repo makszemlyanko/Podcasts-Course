@@ -40,7 +40,7 @@ class PlayerDetailView: UIView {
 
     var panGesture: UIPanGestureRecognizer!
 
-    fileprivate let shrunkenTransform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+    private let shrunkenTransform = CGAffineTransform(scaleX: 0.7, y: 0.7)
 
     static func initFromNib() -> PlayerDetailView {
         return Bundle.main.loadNibNamed("PlayerDetailView", owner: self, options: nil)?.first as! PlayerDetailView
@@ -52,7 +52,6 @@ class PlayerDetailView: UIView {
 
     // MARK: - IB Outlets
 
-    // Mini episode player view
     @IBOutlet weak var miniEpisodeImageView: UIImageView! {
         didSet {
             miniEpisodeImageView.contentMode = .scaleAspectFill
@@ -74,8 +73,7 @@ class PlayerDetailView: UIView {
 
     @IBOutlet weak var miniPlayerView: UIView!
     @IBOutlet weak var maximizedStackView: UIStackView!
-
-    // Maxi episode player view
+    
     @IBOutlet weak var episodeImageView: UIImageView! {
         didSet {
             episodeImageView.transform = shrunkenTransform
@@ -135,13 +133,13 @@ class PlayerDetailView: UIView {
         UIApplication.mainTabBarController()?.minimizePlayerDetail()
     }
 
-    fileprivate func seekToCurrentTime(delta: Int64) {
+    private func seekToCurrentTime(delta: Int64) {
         let fifteenSeconds = CMTimeMake(value: delta, timescale: 1)
         let seekTime = CMTimeAdd(player.currentTime(), fifteenSeconds)
         player.seek(to: seekTime)
     }
 
-    fileprivate func observePlayerCurrentTime() {
+    private func observePlayerCurrentTime() {
         let interval = CMTimeMake(value: 1, timescale: 2)
         player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] (time) in
             self?.currentTimeLabel.text = time.toDisplayString()
@@ -151,14 +149,14 @@ class PlayerDetailView: UIView {
         }
     }
 
-    fileprivate func updateCurrentTimeSlider() {
+    private func updateCurrentTimeSlider() {
         let currentTimeSeconds = CMTimeGetSeconds(player.currentTime())
         let durationSeconds = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(value: 1, timescale: 1 ))
         let percentage = currentTimeSeconds / durationSeconds
         self.episodeDurationSlider.value = Float(percentage)
     }
 
-    fileprivate func setupGestures() {
+    private func setupGestures() {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximize)))
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         miniPlayerView.addGestureRecognizer(panGesture)
@@ -167,9 +165,7 @@ class PlayerDetailView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
         setupAudioSession()
-
         setupGestures()
         observePlayerCurrentTime()
 
@@ -185,7 +181,7 @@ class PlayerDetailView: UIView {
 
     }
 
-    fileprivate func setupAudioSession() {
+    private func setupAudioSession() {
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
@@ -194,7 +190,7 @@ class PlayerDetailView: UIView {
         }
     }
 
-    @objc fileprivate func handlePlayPause() {
+    @objc private func handlePlayPause() {
         print("play and pause button")
         if player.timeControlStatus == .paused {
             player.play()
@@ -209,7 +205,7 @@ class PlayerDetailView: UIView {
         }
     }
 
-    fileprivate func playEpisode() {
+    private func playEpisode() {
         if episode.fileUrl != nil {
             playEpisodeUsingFileUrl()
         } else {
@@ -221,7 +217,7 @@ class PlayerDetailView: UIView {
         }
     }
 
-    fileprivate func playEpisodeUsingFileUrl() {
+    private func playEpisodeUsingFileUrl() {
         print("trying to play episode from file Url:", episode.fileUrl ?? "")
 
         // figure out the file name for our episode file url
@@ -238,13 +234,13 @@ class PlayerDetailView: UIView {
 
     // MARK: - Episode image animating
 
-    fileprivate func shrinkEpisodeImageView() {
+    private func shrinkEpisodeImageView() {
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseOut) {
             self.episodeImageView.transform = self.shrunkenTransform
         }
     }
 
-    fileprivate func enlargeEpisodeImageView() {
+    private func enlargeEpisodeImageView() {
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseOut) {
             self.episodeImageView.transform = .identity
         }

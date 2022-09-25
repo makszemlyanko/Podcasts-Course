@@ -10,9 +10,9 @@ import Alamofire
 
 class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     
-    fileprivate let cellId = "cellId"
+    private let cellId = "cellId"
     
-    fileprivate let searchController = UISearchController(searchResultsController: nil)
+    private let searchController = UISearchController(searchResultsController: nil)
     
     var podcasts = [Podcast]()
     
@@ -26,7 +26,7 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     }
     
     // MARK: - Search Bar
-    fileprivate func setupSearchBar() {
+    private func setupSearchBar() {
         definesPresentationContext = true
         navigationItem.searchController = self.searchController
         navigationItem.searchController?.searchBar.tintColor = .systemPurple
@@ -36,7 +36,7 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
         self.searchController.searchBar.delegate = self
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
             APIService.shared.fetchPodacasts(searchText: searchText) { (podcasts) in
@@ -71,7 +71,7 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
         return podcasts.count == 0 ? 350 : 0
     }
     
-    fileprivate func setupTableView() {
+    private func setupTableView() {
         tableView.tableFooterView = UIView() // remove horizontal lines (dividers)
         let nib = UINib(nibName: "PodcastCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
