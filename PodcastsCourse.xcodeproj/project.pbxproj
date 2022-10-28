@@ -105,8 +105,8 @@
 		150DA2312876C98500690800 /* PodcastsCourse */ = {
 			isa = PBXGroup;
 			children = (
-				150DA2402876C98800690800 /* Info.plist */,
-				15DEC29828E0686600D9994E /* Supporting files */,
+				1511FC86290BBE8900C42E1E /* Application */,
+				15DEC29828E0686600D9994E /* SupportingFiles */,
 				153728A428816E0400742456 /* Extensions */,
 				15830E8F287C368D001D2583 /* Service */,
 				15368514287820E20022C6F1 /* Models */,
@@ -126,6 +126,15 @@
 				15984E5C28C1E8E700D2949F /* DownloadsController */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1511FC86290BBE8900C42E1E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				150DA2342876C98500690800 /* SceneDelegate.swift */,
+				150DA2322876C98500690800 /* AppDelegate.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		15368514287820E20022C6F1 /* Models */ = {
@@ -225,17 +234,16 @@
 			path = DownloadsController;
 			sourceTree = "<group>";
 		};
-		15DEC29828E0686600D9994E /* Supporting files */ = {
+		15DEC29828E0686600D9994E /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				150DA2402876C98800690800 /* Info.plist */,
 				150DA23B2876C98800690800 /* Assets.xcassets */,
 				150DA2362876C98500690800 /* ViewController.swift */,
-				150DA2322876C98500690800 /* AppDelegate.swift */,
-				150DA2342876C98500690800 /* SceneDelegate.swift */,
 				150DA2382876C98500690800 /* Main.storyboard */,
 				150DA23D2876C98800690800 /* LaunchScreen.storyboard */,
 			);
-			path = "Supporting files";
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		15DEC29B28E06DEC00D9994E /* View */ = {
@@ -571,7 +579,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48KB556P8Y;
-				INFOPLIST_FILE = PodcastsCourse/Info.plist;
+				INFOPLIST_FILE = PodcastsCourse/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -591,7 +599,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48KB556P8Y;
-				INFOPLIST_FILE = PodcastsCourse/Info.plist;
+				INFOPLIST_FILE = PodcastsCourse/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
