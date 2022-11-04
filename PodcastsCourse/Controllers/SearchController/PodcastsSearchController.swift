@@ -72,7 +72,6 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     }
     
     private func setupTableView() {
-        tableView.tableFooterView = UIView() // remove horizontal lines (dividers)
         let nib = UINib(nibName: "PodcastCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
     }
